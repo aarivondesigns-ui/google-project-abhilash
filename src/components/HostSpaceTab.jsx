@@ -1,9 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Home, Building2, Briefcase, ShoppingBag, Calendar, 
-  Clock, DollarSign, Zap, CheckCircle2, ArrowRight, Sparkles, MapPin 
+  Clock, DollarSign, Zap, CheckCircle2, ArrowRight, Sparkles, MapPin,
+  Navigation, Crosshair, Lock, Unlock, Loader2
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
+
+const HYD_COORDS_MAP = {
+  'Gachibowli': { lat: 17.4435, lng: 78.3582, address: 'Near DLF Cybercity Gate 1 & ORR, Gachibowli, Hyderabad 500032' },
+  'Hitec City / Madhapur': { lat: 17.4502, lng: 78.3812, address: 'Near Cyber Towers & Metro Station, Hitec City, Madhapur 500081' },
+  'Financial District': { lat: 17.4210, lng: 78.3490, address: 'WaveRock IT Gateway Road, Nanakramguda, Financial District 500032' },
+  'Jubilee Hills': { lat: 17.4355, lng: 78.4020, address: 'Road Number 45 / 36, Jubilee Hills, Hyderabad 500033' },
+  'Kondapur': { lat: 17.4650, lng: 78.3620, address: 'Near Botanical Garden Road, Kondapur, Hyderabad 500084' },
+  'Manikonda': { lat: 17.4010, lng: 78.3850, address: 'Near Lanco Hills & Outer Ring Road, Manikonda 500089' }
+};
 
 export default function HostSpaceTab({ onAddNewSpot }) {
   const [step, setStep] = useState(1);
@@ -11,8 +21,61 @@ export default function HostSpaceTab({ onAddNewSpot }) {
   // Form State
   const [propertyType, setPropertyType] = useState('Home Driveway');
   const [title, setTitle] = useState('');
-  const [area, setArea] = useState('Kondapur / Hitec City');
+  const [area, setArea] = useState('Gachibowli');
   const [address, setAddress] = useState('');
+
+  // GPS Location Lock State
+  const [lockedCoords, setLockedCoords] = useState(HYD_COORDS_MAP['Gachibowli']);
+  const [isLocating, setIsLocating] = useState(false);
+  const [isLocationLocked, setIsLocationLocked] = useState(false);
+  const [lockMethod, setLockMethod] = useState('preset'); // 'gps' | 'preset'
+  const [gpsAccuracy, setGpsAccuracy] = useState(null);
+
+  // Auto-update coordinates preset when area dropdown changes (if not locked by physical GPS)
+  useEffect(() => {
+    if (!isLocationLocked || lockMethod === 'preset') {
+      const preset = HYD_COORDS_MAP[area] || HYD_COORDS_MAP['Gachibowli'];
+      setLockedCoords(preset);
+      if (!address || address.includes('Hyderabad')) {
+        setAddress(preset.address);
+      }
+    }
+  }, [area]);
+
+  const handleDetectGPS = () => {
+    setIsLocating(true);
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          const lat = parseFloat(pos.coords.latitude.toFixed(6));
+          const lng = parseFloat(pos.coords.longitude.toFixed(6));
+          const acc = Math.round(pos.coords.accuracy);
+          setLockedCoords({ lat, lng, address: address || `Near ${area}, Hyderabad` });
+          setIsLocationLocked(true);
+          setLockMethod('gps');
+          setGpsAccuracy(acc);
+          setIsLocating(false);
+        },
+        (err) => {
+          // Graceful fallback to locality preset
+          const preset = HYD_COORDS_MAP[area] || HYD_COORDS_MAP['Gachibowli'];
+          setLockedCoords(preset);
+          setIsLocationLocked(true);
+          setLockMethod('preset');
+          setGpsAccuracy(12);
+          setIsLocating(false);
+        },
+        { enableHighAccuracy: true, timeout: 8000, maximumAge: 0 }
+      );
+    } else {
+      const preset = HYD_COORDS_MAP[area] || HYD_COORDS_MAP['Gachibowli'];
+      setLockedCoords(preset);
+      setIsLocationLocked(true);
+      setLockMethod('preset');
+      setIsLocating(false);
+    }
+  };
+
   
   // Schedule & Rate
   const [scheduleType, setScheduleType] = useState('Mon–Fri (9 AM – 6 PM)');
@@ -90,7 +153,10 @@ export default function HostSpaceTab({ onAddNewSpot }) {
         },
         // Position near center of Hyderabad canvas
         coords: { x: 55 + (Math.random() * 16 - 8), y: 45 + (Math.random() * 16 - 8) },
-        realCoords: { lat: 17.4375, lng: 78.375 },
+        realCoords: { 
+          lat: lockedCoords.lat || 17.4435, 
+          lng: lockedCoords.lng || 78.3582 
+        },
         image: propertyType.includes('Home')
           ? 'https://images.unsplash.com/photo-1584463699042-3a33994a50d8?auto=format&fit=crop&w=800&q=80'
           : 'https://images.unsplash.com/photo-1590674899484-d5640e854abe?auto=format&fit=crop&w=800&q=80',
@@ -252,8 +318,79 @@ export default function HostSpaceTab({ onAddNewSpot }) {
             </select>
           </div>
 
+          {/* GPS Location Lock Section */}
+          <div className="bg-[#0e1117] border border-cardBorder/80 rounded-2xl p-3.5 space-y-3">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <div className={`w-7 h-7 rounded-lg flex items-center justify-center ${
+                  isLocationLocked ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' : 'bg-brandYellow/20 text-brandYellow'
+                }`}>
+                  {isLocationLocked ? <Lock className="w-3.5 h-3.5" /> : <Crosshair className="w-3.5 h-3.5" />}
+                </div>
+                <div>
+                  <div className="text-xs font-bold text-white flex items-center gap-1.5">
+                    <span>GPS Spot Coordinates</span>
+                    {isLocationLocked && (
+                      <span className="bg-emerald-500/20 text-emerald-400 text-[10px] font-bold px-1.5 py-0.5 rounded-full border border-emerald-500/30">
+                        ✓ Locked
+                      </span>
+                    )}
+                  </div>
+                  <div className="text-[10px] text-gray-400">
+                    {isLocationLocked 
+                      ? `${lockedCoords.lat.toFixed(4)}° N, ${lockedCoords.lng.toFixed(4)}° E (${lockMethod === 'gps' ? 'Live GPS' : 'Locality Pin'})`
+                      : 'Lock accurate coordinates for drivers to navigate'}
+                  </div>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                onClick={handleDetectGPS}
+                disabled={isLocating}
+                className="px-3 py-1.5 bg-gradient-to-r from-amber-500/20 to-yellow-500/20 hover:from-amber-500/30 hover:to-yellow-500/30 border border-brandYellow/40 rounded-xl text-[11px] font-bold text-brandYellow flex items-center gap-1.5 transition-all shadow-sm active:scale-95"
+              >
+                {isLocating ? (
+                  <>
+                    <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                    <span>Locating...</span>
+                  </>
+                ) : isLocationLocked ? (
+                  <>
+                    <Crosshair className="w-3.5 h-3.5 text-emerald-400" />
+                    <span>Re-detect GPS</span>
+                  </>
+                ) : (
+                  <>
+                    <Navigation className="w-3.5 h-3.5" />
+                    <span>Lock GPS Location</span>
+                  </>
+                )}
+              </button>
+            </div>
+
+            {/* Address / Landmark detail */}
+            <div>
+              <label className="text-[11px] font-medium text-gray-400 block mb-1">
+                Street Address / Landmark (Auto-filled from locked location)
+              </label>
+              <input
+                type="text"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+                placeholder="Plot number, apartment name, street or gate info"
+                className="w-full bg-[#0B0D10] border border-cardBorder rounded-xl p-2.5 text-xs text-white focus:outline-none focus:border-brandYellow"
+              />
+            </div>
+          </div>
+
           <button
-            onClick={() => setStep(2)}
+            onClick={() => {
+              if (!isLocationLocked) {
+                setIsLocationLocked(true);
+              }
+              setStep(2);
+            }}
             className="w-full py-3 bg-brandYellow hover:bg-brandYellow-hover text-black font-extrabold rounded-xl text-xs flex items-center justify-center gap-2 glow-yellow transition-all"
           >
             <span>Continue to Schedule & Pricing</span>
