@@ -97,37 +97,38 @@ export default function HostDashboard({ spots, onSwitchToDriverMode, onAddNewSpo
       {currentTab === 'overview' && (
         <div className="space-y-4 animate-in fade-in duration-150">
           {/* Host Revenue Card */}
-          <div className="bg-gradient-to-br from-[#161920] via-[#10141D] to-[#0B0D10] border border-cardBorder rounded-3xl p-5 shadow-2xl relative overflow-hidden">
+          <div className="bg-white dark:bg-gradient-to-br dark:from-[#161920] dark:via-[#10141D] dark:to-[#0B0D10] border border-gray-200 dark:border-cardBorder rounded-3xl p-5 shadow-2xl relative overflow-hidden host-revenue-card">
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-neonGreen animate-pulse" />
-                <span className="text-xs font-black uppercase tracking-wider text-neonGreen">
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+                <span className="text-xs font-black uppercase tracking-wider text-emerald-600 dark:text-neonGreen">
                   Host Partner Portal
                 </span>
               </div>
-              <span className="text-[10px] bg-brandYellow/15 text-brandYellow font-bold px-2 py-0.5 rounded-full border border-brandYellow/30">
+              <span className="text-[10px] bg-amber-500/15 text-amber-700 dark:text-brandYellow font-bold px-2 py-0.5 rounded-full border border-amber-500/30">
                 2 Active Spots in Hyderabad
               </span>
             </div>
 
             <div className="space-y-1">
-              <div className="text-xs text-gray-400">Today's Earnings (Direct UPI)</div>
-              <div className="text-3xl font-black text-white flex items-center">
-                <span className="text-brandYellow mr-1">₹</span>{todayEarnings}
-                <span className="text-xs font-semibold text-neonGreen bg-neonGreen/10 px-2 py-0.5 rounded ml-2">
+              <div className="text-xs text-gray-500 dark:text-gray-400 font-medium">Today's Earnings (Direct UPI)</div>
+              <div className="text-3xl font-black text-gray-900 dark:text-white flex items-center">
+                <span className="text-brandYellow mr-1 font-black">₹</span>
+                <span className="text-gray-900 dark:text-white host-revenue-earnings">{todayEarnings}</span>
+                <span className="text-xs font-bold text-emerald-700 dark:text-neonGreen bg-emerald-500/15 dark:bg-neonGreen/10 border border-emerald-500/30 px-2 py-0.5 rounded-lg ml-2">
                   +18% vs avg
                 </span>
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-2 mt-4 pt-3 border-t border-cardBorder/70 text-xs">
+            <div className="grid grid-cols-2 gap-2 mt-4 pt-3 border-t border-gray-100 dark:border-cardBorder/70 text-xs">
               <div>
-                <div className="text-gray-400 text-[10px]">Total Parkers Hosted</div>
-                <div className="text-sm font-bold text-white">4 Parkers Today</div>
+                <div className="text-gray-500 dark:text-gray-400 text-[10px]">Total Parkers Hosted</div>
+                <div className="text-sm font-bold text-gray-900 dark:text-white">4 Parkers Today</div>
               </div>
               <div>
-                <div className="text-gray-400 text-[10px]">Pending Bank Payout</div>
-                <div className="text-sm font-bold text-brandYellow">₹{pendingPayout.toFixed(2)}</div>
+                <div className="text-gray-500 dark:text-gray-400 text-[10px]">Pending Bank Payout</div>
+                <div className="text-sm font-bold text-amber-600 dark:text-brandYellow">₹{pendingPayout.toFixed(2)}</div>
               </div>
             </div>
 

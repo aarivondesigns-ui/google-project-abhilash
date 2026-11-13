@@ -159,9 +159,27 @@ html.light .bg-\[\#161920\],
 html.light .bg-\[\#161920\]\/95,
 html.light .bg-\[\#161920\]\/90,
 html.light .bg-\[\#161920\]\/80,
-html.light .bg-cardBg {
+html.light .bg-\[\#151821\],
+html.light .bg-\[\#171A24\],
+html.light .bg-\[\#181C25\],
+html.light .bg-\[\#0D1016\],
+html.light .bg-\[\#0E1015\],
+html.light .bg-cardBg,
+html.light .host-revenue-card,
+html.light [class*="from-\[\#161920\]"],
+html.light [class*="from-\[\#181C25\]"],
+html.light [class*="from-\[\#171A24\]"],
+html.light [class*="from-\[\#1A1F2C\]"],
+html.light [class*="from-\[\#10141D\]"],
+html.light [class*="to-\[\#0B0D10\]"] {
+  background-image: none !important;
   background-color: #FFFFFF !important;
+  border-color: #E2E8F0 !important;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 1px 2px -1px rgba(0, 0, 0, 0.04) !important;
+}
+
+html.light .host-revenue-earnings {
+  color: #0F172A !important;
 }
 
 html.light .bg-\[\#262A34\],
@@ -172,6 +190,8 @@ html.light .hover\:bg-\[\#262A34\]:hover {
 /* Borders */
 html.light .border-cardBorder,
 html.light .border-\[\#262A34\],
+html.light .border-white\/10,
+html.light .border-white\/20,
 html.light .sm\:border-cardBorder {
   border-color: #E2E8F0 !important;
 }
