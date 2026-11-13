@@ -205,6 +205,23 @@ html.light .text-gray-100 {
   color: #0F172A !important;
 }
 
+/* Explicitly preserve text contrast on dark overlays and map pills */
+html.light .map-radar-pill-text {
+  color: #0F172A !important;
+}
+
+html.dark .map-radar-pill-text {
+  color: #FFFFFF !important;
+}
+
+html.light .text-always-white,
+html.light [class*="bg-black/"] .text-white,
+html.light [class*="bg-black"] .text-white,
+html.light [class*="bg-black/"] span.text-white,
+html.light [class*="bg-black"] span.text-white {
+  color: #FFFFFF !important;
+}
+
 html.light .text-gray-200 {
   color: #1E293B !important;
 }

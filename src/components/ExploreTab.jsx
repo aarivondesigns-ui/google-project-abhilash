@@ -172,9 +172,9 @@ export default function ExploreTab({ spots, onBookSpot }) {
 
             {/* Map Guidance Overlay Pill */}
             <div className="absolute top-2.5 left-3 z-10 pointer-events-none">
-              <div className="bg-black/80 backdrop-blur-md px-2.5 py-1 rounded-full text-[10px] font-bold text-gray-200 border border-white/10 flex items-center gap-1.5 shadow-lg">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-                <span>Live Map Radar • Tap any pin to view</span>
+              <div className="bg-white/95 dark:bg-[#0B0D10]/95 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-black text-gray-900 dark:text-white border border-gray-200 dark:border-white/15 flex items-center gap-1.5 shadow-md">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span className="map-radar-pill-text">Live Map Radar • Tap any pin to view</span>
               </div>
             </div>
           </div>
