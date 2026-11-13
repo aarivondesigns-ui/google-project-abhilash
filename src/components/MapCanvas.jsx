@@ -171,6 +171,12 @@ export default function MapCanvas({ spots, selectedSpot, onSelectSpot }) {
           className: tileClass,
         }).addTo(map);
 
+        setTimeout(() => {
+          if (mapInstanceRef.current) {
+            mapInstanceRef.current.invalidateSize();
+          }
+        }, 150);
+
         updateLeafletMarkers(map);
       } else {
         // Switch tile layer if engine changed
@@ -207,6 +213,7 @@ export default function MapCanvas({ spots, selectedSpot, onSelectSpot }) {
   // Update markers and center on selectedSpot change
   useEffect(() => {
     if (mapInstanceRef.current && (mapEngine === 'google' || mapEngine === 'satellite')) {
+      mapInstanceRef.current.invalidateSize();
       updateLeafletMarkers(mapInstanceRef.current);
 
       if (selectedSpot?.realCoords?.lat && selectedSpot?.realCoords?.lng) {
