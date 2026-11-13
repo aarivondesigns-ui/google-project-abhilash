@@ -7,24 +7,24 @@ import {
 export default function BottomNav({ role, activeTab, onTabChange, hasActiveBooking }) {
   const driverTabs = [
     { id: 'explore', label: 'Explore', icon: Compass },
-    { id: 'offers', label: 'Offers & Coupons', icon: Tag, badge: '10 Deals' },
-    { id: 'wallet', label: 'Wallet', icon: Wallet, badge: '₹850' },
-    { id: 'bookings', label: 'My Bookings', icon: KeyRound, hasNotification: hasActiveBooking },
+    { id: 'offers', label: 'Offers', icon: Tag, badge: '10' },
+    { id: 'wallet', label: 'Wallet', icon: Wallet },
+    { id: 'bookings', label: 'Bookings', icon: KeyRound, hasNotification: hasActiveBooking },
   ];
 
   const hostTabs = [
     { id: 'overview', label: 'Earnings', icon: TrendingUp },
-    { id: 'list', label: 'List Space', icon: PlusCircle, badge: 'New' },
+    { id: 'list', label: 'List Space', icon: PlusCircle, badge: 'NEW' },
     { id: 'listings', label: 'My Spots', icon: Building2 },
     { id: 'logs', label: 'Gate Logs', icon: Shield },
   ];
 
   const tabs = role === 'host' ? hostTabs : driverTabs;
-  const activeColor = role === 'host' ? 'text-neonGreen' : 'text-brandYellow';
-  const pillColor = role === 'host' ? 'bg-neonGreen glow-green' : 'bg-brandYellow glow-yellow';
+  const activeColor = role === 'host' ? 'text-emerald-600 dark:text-neonGreen' : 'text-amber-600 dark:text-brandYellow';
+  const pillColor = role === 'host' ? 'bg-emerald-500 dark:bg-neonGreen glow-green' : 'bg-amber-500 dark:bg-brandYellow glow-yellow';
 
   return (
-    <nav className="sticky bottom-0 bg-[#0B0D10]/95 backdrop-blur-md border-t border-cardBorder px-2 py-1.5 flex items-center justify-around z-40 max-w-md mx-auto w-full">
+    <nav className="sticky bottom-0 bg-white/95 dark:bg-[#0B0D10]/95 backdrop-blur-md border-t border-gray-200 dark:border-cardBorder px-2 py-1.5 flex items-center justify-around z-40 max-w-md mx-auto w-full transition-colors">
       {tabs.map((tab) => {
         const Icon = tab.icon;
         const isActive = activeTab === tab.id;
@@ -33,31 +33,34 @@ export default function BottomNav({ role, activeTab, onTabChange, hasActiveBooki
           <button
             key={tab.id}
             onClick={() => onTabChange(tab.id)}
-            className={`flex flex-col items-center justify-center flex-1 py-1 px-1 rounded-xl transition-all relative ${
+            className={`flex flex-col items-center justify-center flex-1 py-1 px-1 rounded-xl transition-all relative group ${
               isActive
-                ? `${activeColor} font-extrabold`
-                : 'text-gray-400 hover:text-gray-200'
+                ? `${activeColor} font-black`
+                : 'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
             }`}
           >
-            <div className="relative">
+            <div className="relative flex items-center justify-center">
               <Icon
-                className={`w-5 h-5 transition-transform ${
-                  isActive ? 'scale-110 stroke-[2.5]' : 'stroke-[1.8]'
+                className={`w-5 h-5 transition-transform duration-200 ${
+                  isActive ? 'scale-110 stroke-[2.4]' : 'stroke-[1.8] group-hover:scale-105'
                 }`}
               />
 
-              {/* Notification dot for active booking */}
+              {/* Notification dot for active booking pass */}
               {tab.hasNotification && (
-                <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-neonGreen animate-ping-slow" />
+                <span className="absolute -top-1 -right-1 flex h-2.5 w-2.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500 border border-white dark:border-[#0B0D10]"></span>
+                </span>
               )}
 
-              {/* Badge */}
+              {/* High-visibility clean micro-badge */}
               {tab.badge && (
                 <span
-                  className={`absolute -top-1.5 -right-3 text-[7px] font-black px-1 rounded-full border ${
+                  className={`absolute -top-1.5 -right-3.5 px-1.5 min-w-[16px] h-3.5 text-[8.5px] font-black rounded-full flex items-center justify-center shadow-md whitespace-nowrap leading-none border transition-all ${
                     role === 'host'
-                      ? 'bg-neonGreen/20 text-neonGreen border-neonGreen/30'
-                      : 'bg-brandYellow/20 text-brandYellow border-brandYellow/30'
+                      ? 'bg-emerald-500 text-black border-emerald-400'
+                      : 'bg-gradient-to-r from-amber-400 to-yellow-400 text-black border-yellow-300'
                   }`}
                 >
                   {tab.badge}
@@ -65,13 +68,13 @@ export default function BottomNav({ role, activeTab, onTabChange, hasActiveBooki
               )}
             </div>
 
-            <span className={`text-[10px] mt-1 tracking-tight ${isActive ? 'font-bold' : 'font-medium'}`}>
+            <span className={`text-[10px] mt-1 tracking-tight transition-colors ${isActive ? 'font-black' : 'font-semibold'}`}>
               {tab.label}
             </span>
 
             {/* Active Pill Indicator */}
             {isActive && (
-              <span className={`w-4 h-0.5 rounded-full ${pillColor} mt-0.5`} />
+              <span className={`w-4 h-0.5 rounded-full ${pillColor} mt-0.5 transition-all`} />
             )}
           </button>
         );
