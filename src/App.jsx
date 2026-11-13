@@ -6,7 +6,6 @@ import WalletTab from './components/WalletTab';
 import OffersTab from './components/OffersTab';
 import MyBookingsTab from './components/MyBookingsTab';
 import HostDashboard from './components/HostDashboard';
-import CredentialsModal from './components/CredentialsModal';
 import LoginModal from './components/LoginModal';
 import SupportSettingsModal from './components/SupportSettingsModal';
 import { INITIAL_SPOTS, INITIAL_ACTIVE_BOOKING } from './data/spots';

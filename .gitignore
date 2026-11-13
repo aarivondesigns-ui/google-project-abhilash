@@ -26,3 +26,7 @@ dist-ssr
 # SQLite temp files
 *.db-shm
 *.db-wal
+
+.env
+.env.local
+
