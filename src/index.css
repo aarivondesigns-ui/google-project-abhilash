@@ -167,10 +167,13 @@ html.light .bg-\[\#0E1015\],
 html.light .bg-cardBg,
 html.light .host-revenue-card,
 html.light [class*="from-\[\#161920\]"],
+html.light [class*="via-\[\#161920\]"],
 html.light [class*="from-\[\#181C25\]"],
+html.light [class*="via-\[\#181C25\]"],
 html.light [class*="from-\[\#171A24\]"],
 html.light [class*="from-\[\#1A1F2C\]"],
 html.light [class*="from-\[\#10141D\]"],
+html.light [class*="via-\[\#10141D\]"],
 html.light [class*="to-\[\#0B0D10\]"] {
   background-image: none !important;
   background-color: #FFFFFF !important;

@@ -24,7 +24,7 @@ export default function BottomNav({ role, activeTab, onTabChange, hasActiveBooki
   const pillColor = role === 'host' ? 'bg-neonGreen glow-green' : 'bg-brandYellow glow-yellow';
 
   return (
-    <nav className="sticky bottom-0 bg-[#0B0D10]/90 backdrop-blur-xl border-t border-white/10 px-3 py-2 flex items-center justify-around z-40 max-w-md mx-auto w-full select-none shadow-2xl">
+    <nav className="sticky bottom-0 bg-[#0B0D10]/95 backdrop-blur-md border-t border-cardBorder px-2 py-1.5 flex items-center justify-around z-40 max-w-md mx-auto w-full">
       {tabs.map((tab) => {
         const Icon = tab.icon;
         const isActive = activeTab === tab.id;
@@ -33,30 +33,30 @@ export default function BottomNav({ role, activeTab, onTabChange, hasActiveBooki
           <button
             key={tab.id}
             onClick={() => onTabChange(tab.id)}
-            className={`flex flex-col items-center justify-center flex-1 py-1.5 px-2 rounded-2xl transition-all duration-200 relative ${
+            className={`flex flex-col items-center justify-center flex-1 py-1 px-1 rounded-xl transition-all relative ${
               isActive
-                ? `${activeColor} bg-white/[0.04] font-extrabold shadow-sm`
-                : 'text-gray-400 hover:text-gray-200 hover:bg-white/[0.02]'
+                ? `${activeColor} font-extrabold`
+                : 'text-gray-400 hover:text-gray-200'
             }`}
           >
             <div className="relative">
               <Icon
-                className={`w-5 h-5 transition-transform duration-200 ${
+                className={`w-5 h-5 transition-transform ${
                   isActive ? 'scale-110 stroke-[2.5]' : 'stroke-[1.8]'
                 }`}
               />
 
               {/* Notification dot for active booking */}
               {tab.hasNotification && (
-                <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping-slow" />
+                <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-neonGreen animate-ping-slow" />
               )}
 
               {/* Badge */}
               {tab.badge && (
                 <span
-                  className={`absolute -top-1.5 -right-3 text-[7.5px] font-black px-1.5 py-0.2 rounded-full border shadow-sm ${
+                  className={`absolute -top-1.5 -right-3 text-[7px] font-black px-1 rounded-full border ${
                     role === 'host'
-                      ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30'
+                      ? 'bg-neonGreen/20 text-neonGreen border-neonGreen/30'
                       : 'bg-brandYellow/20 text-brandYellow border-brandYellow/30'
                   }`}
                 >
@@ -71,7 +71,7 @@ export default function BottomNav({ role, activeTab, onTabChange, hasActiveBooki
 
             {/* Active Pill Indicator */}
             {isActive && (
-              <span className={`w-5 h-0.5 rounded-full ${pillColor} mt-0.5`} />
+              <span className={`w-4 h-0.5 rounded-full ${pillColor} mt-0.5`} />
             )}
           </button>
         );
