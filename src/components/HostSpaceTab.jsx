@@ -260,7 +260,7 @@ export default function HostSpaceTab({ onAddNewSpot }) {
 
       {/* Step 1: Property Type */}
       {step === 1 && (
-        <div className="bg-[#161920] border border-cardBorder rounded-2xl p-4 space-y-4">
+        <div className="bg-gradient-to-b from-[#181C25] to-[#101319] border border-white/10 rounded-2xl p-4.5 space-y-4 shadow-xl">
           <div className="text-xs font-bold text-gray-300 uppercase tracking-wider">
             Step 1: Choose Property Type
           </div>
@@ -273,10 +273,10 @@ export default function HostSpaceTab({ onAddNewSpot }) {
                 <div
                   key={opt.label}
                   onClick={() => setPropertyType(opt.label)}
-                  className={`p-3 rounded-2xl border cursor-pointer transition-all ${
+                  className={`p-3 rounded-2xl border cursor-pointer transition-all duration-200 ${
                     isSelected
-                      ? 'bg-brandYellow/15 border-brandYellow text-white glow-yellow'
-                      : 'bg-[#0B0D10] border-cardBorder text-gray-400 hover:border-gray-600'
+                      ? 'bg-brandYellow/15 border-brandYellow text-white glow-yellow scale-[1.02]'
+                      : 'bg-[#151821] border-white/10 text-gray-400 hover:border-white/20 hover:text-gray-200'
                   }`}
                 >
                   <Icon className={`w-5 h-5 mb-2 ${isSelected ? 'text-brandYellow' : 'text-gray-400'}`} />
@@ -296,7 +296,7 @@ export default function HostSpaceTab({ onAddNewSpot }) {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="e.g. My Gated Villa Driveway (Near DLF Gate)"
-              className="w-full bg-[#0B0D10] border border-cardBorder rounded-xl p-3 text-xs text-white focus:outline-none focus:border-brandYellow"
+              className="w-full bg-[#151821] border border-white/10 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-brandYellow focus:ring-1 focus:ring-brandYellow/40 transition-all shadow-inner"
             />
           </div>
 
@@ -307,7 +307,7 @@ export default function HostSpaceTab({ onAddNewSpot }) {
             <select
               value={area}
               onChange={(e) => setArea(e.target.value)}
-              className="w-full bg-[#0B0D10] border border-cardBorder rounded-xl p-3 text-xs text-white focus:outline-none focus:border-brandYellow"
+              className="w-full bg-[#151821] border border-white/10 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-brandYellow focus:ring-1 focus:ring-brandYellow/40 transition-all shadow-inner"
             >
               <option value="Gachibowli">Gachibowli (Near ORR / DLF)</option>
               <option value="Hitec City / Madhapur">Hitec City / Madhapur (Cyber Towers)</option>
@@ -319,7 +319,7 @@ export default function HostSpaceTab({ onAddNewSpot }) {
           </div>
 
           {/* GPS Location Lock Section */}
-          <div className="bg-[#0e1117] border border-cardBorder/80 rounded-2xl p-3.5 space-y-3">
+          <div className="bg-[#0D1016] border border-white/10 rounded-2xl p-3.5 space-y-3 shadow-md">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <div className={`w-7 h-7 rounded-lg flex items-center justify-center ${
@@ -379,7 +379,7 @@ export default function HostSpaceTab({ onAddNewSpot }) {
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
                 placeholder="Plot number, apartment name, street or gate info"
-                className="w-full bg-[#0B0D10] border border-cardBorder rounded-xl p-2.5 text-xs text-white focus:outline-none focus:border-brandYellow"
+                className="w-full bg-[#151821] border border-white/10 rounded-xl p-2.5 text-xs text-white focus:outline-none focus:border-brandYellow focus:ring-1 focus:ring-brandYellow/40 transition-all shadow-inner"
               />
             </div>
           </div>
@@ -391,7 +391,7 @@ export default function HostSpaceTab({ onAddNewSpot }) {
               }
               setStep(2);
             }}
-            className="w-full py-3 bg-brandYellow hover:bg-brandYellow-hover text-black font-extrabold rounded-xl text-xs flex items-center justify-center gap-2 glow-yellow transition-all"
+            className="w-full py-3 bg-gradient-to-r from-amber-400 via-brandYellow to-yellow-500 hover:from-amber-300 hover:to-yellow-400 text-black font-black rounded-xl text-xs flex items-center justify-center gap-2 glow-yellow transition-all active:scale-95 shadow-lg"
           >
             <span>Continue to Schedule & Pricing</span>
             <ArrowRight className="w-4 h-4" />

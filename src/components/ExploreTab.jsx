@@ -106,7 +106,7 @@ export default function ExploreTab({ spots, onBookSpot }) {
   return (
     <div ref={scrollRef} className="flex-1 flex flex-col h-full overflow-y-auto relative no-scrollbar">
       {/* Top Search Bar & Filter Pills (Sticky) */}
-      <div ref={headerRef} className="sticky top-0 bg-[#0B0D10]/95 backdrop-blur-md px-4 pt-3 pb-2.5 border-b border-cardBorder space-y-2.5 z-30 flex-shrink-0 shadow-lg">
+      <div ref={headerRef} className="sticky top-0 bg-[#0B0D10]/90 backdrop-blur-xl px-4 pt-3 pb-2.5 border-b border-white/10 space-y-2.5 z-30 flex-shrink-0 shadow-lg">
         {/* Clean, Modern Search Bar */}
         <div className="relative flex items-center">
           <Search className="w-4 h-4 text-brandYellow absolute left-3.5 pointer-events-none" />
@@ -115,7 +115,7 @@ export default function ExploreTab({ spots, onBookSpot }) {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search areas, landmarks, or EV charging bays..."
-            className="w-full bg-[#161920] border border-cardBorder rounded-2xl pl-10 pr-9 py-2.5 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-brandYellow transition-colors shadow-inner"
+            className="w-full bg-[#151821] border border-white/10 rounded-2xl pl-10 pr-9 py-2.5 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-brandYellow focus:ring-1 focus:ring-brandYellow/40 transition-all shadow-inner"
           />
           {searchQuery && (
             <button
@@ -139,8 +139,8 @@ export default function ExploreTab({ spots, onBookSpot }) {
                   onClick={() => setActiveFilter(filter.id)}
                   className={`px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-1 border ${
                     isActive
-                      ? 'bg-brandYellow text-black border-brandYellow glow-yellow font-bold shadow-md'
-                      : 'bg-[#161920] text-gray-400 border-cardBorder hover:text-white hover:border-gray-600'
+                      ? 'bg-gradient-to-r from-amber-400 to-yellow-400 text-black border-transparent glow-yellow font-black shadow-md'
+                      : 'bg-[#151821] text-gray-400 border-white/10 hover:text-white hover:border-white/20'
                   }`}
                 >
                   {filter.label}
@@ -151,7 +151,7 @@ export default function ExploreTab({ spots, onBookSpot }) {
 
           {/* Prominent Segmented Map / List Switcher */}
           <div className="relative flex items-center flex-shrink-0">
-            <div className="flex items-center bg-[#161920] p-1 rounded-xl border border-cardBorder shadow-sm">
+            <div className="flex items-center bg-[#151821] p-1 rounded-xl border border-white/10 shadow-sm">
               <button
                 onClick={() => {
                   setViewMode('map');
@@ -159,7 +159,7 @@ export default function ExploreTab({ spots, onBookSpot }) {
                 }}
                 className={`px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all ${
                   viewMode === 'map'
-                    ? 'bg-brandYellow text-black shadow-md glow-yellow font-black'
+                    ? 'bg-gradient-to-r from-amber-400 to-yellow-400 text-black shadow-md glow-yellow font-black'
                     : 'text-gray-400 hover:text-white'
                 }`}
               >
@@ -170,7 +170,7 @@ export default function ExploreTab({ spots, onBookSpot }) {
                 onClick={() => setViewMode('list')}
                 className={`px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all ${
                   viewMode === 'list'
-                    ? 'bg-brandYellow text-black shadow-md glow-yellow font-black'
+                    ? 'bg-gradient-to-r from-amber-400 to-yellow-400 text-black shadow-md glow-yellow font-black'
                     : 'text-gray-400 hover:text-white'
                 }`}
               >
@@ -222,7 +222,7 @@ export default function ExploreTab({ spots, onBookSpot }) {
           <div className="px-4 py-3 space-y-3 pb-28">
             {/* Selected Spot Bottom Sheet Card */}
             {selectedSpot && (
-              <div className="bg-[#161920] border border-cardBorder hover:border-brandYellow/50 rounded-3xl p-4 shadow-2xl transition-all relative">
+              <div className="bg-gradient-to-b from-[#181C25] to-[#101319] border border-white/10 hover:border-brandYellow/50 rounded-3xl p-4.5 shadow-2xl transition-all relative">
                 {/* AI Probability Badge & Swiggy Offer Top Row */}
                 <div className="flex items-center justify-between mb-2.5">
                   <div
@@ -247,7 +247,7 @@ export default function ExploreTab({ spots, onBookSpot }) {
                 <div className="flex items-start gap-3">
                   <div
                     onClick={() => setIsPhotoOpen(true)}
-                    className="relative w-24 h-24 rounded-2xl overflow-hidden flex-shrink-0 border border-cardBorder cursor-pointer group/img shadow-md hover:border-brandYellow transition-colors"
+                    className="relative w-24 h-24 rounded-2xl overflow-hidden flex-shrink-0 border border-white/10 cursor-pointer group/img shadow-md hover:border-brandYellow transition-colors"
                     title="Click to view 4 spot photos"
                   >
                     <img
@@ -270,7 +270,7 @@ export default function ExploreTab({ spots, onBookSpot }) {
                       </div>
                     )}
                     {selectedSpot.hasEV && (
-                      <div className="absolute top-1 right-1 bg-neonGreen text-black p-1 rounded-lg shadow font-black text-[9px] flex items-center">
+                      <div className="absolute top-1 right-1 bg-emerald-400 text-black p-1 rounded-lg shadow font-black text-[9px] flex items-center">
                         <Zap className="w-3 h-3 fill-current" />
                       </div>
                     )}
@@ -322,27 +322,27 @@ export default function ExploreTab({ spots, onBookSpot }) {
                   {selectedSpot.perks.slice(0, 4).map((perk) => (
                     <span
                       key={perk}
-                      className="text-[9px] bg-[#0B0D10] text-gray-300 px-2 py-0.5 rounded-md border border-cardBorder font-medium"
+                      className="text-[9px] bg-[#0E1015] text-gray-300 px-2 py-0.5 rounded-md border border-white/10 font-medium"
                     >
                       ✓ {perk}
                     </span>
                   ))}
                   {selectedSpot.hasEV && (
-                    <span className="text-[9px] bg-neonGreen/10 text-neonGreen px-2 py-0.5 rounded-md border border-neonGreen/30 font-bold flex items-center gap-0.5">
+                    <span className="text-[9px] bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded-md border border-emerald-500/30 font-bold flex items-center gap-0.5">
                       <Zap className="w-2.5 h-2.5 fill-current" /> EV Charger Ready
                     </span>
                   )}
                 </div>
 
                 {/* Pricing & "Book Now" Primary CTA */}
-                <div className="mt-3.5 pt-3 border-t border-cardBorder flex items-center justify-between">
+                <div className="mt-3.5 pt-3 border-t border-white/10 flex items-center justify-between">
                   <div>
                     <div className="text-[10px] text-gray-400 uppercase font-semibold">Parking Slot Rate</div>
                     <div className="text-base font-black text-white">
                       ₹{selectedSpot.basePrice}
                       <span className="text-xs font-normal text-gray-400">/hr</span>
                       {selectedSpot.hasEV && (
-                        <span className="text-[10px] text-neonGreen ml-1.5 font-bold">
+                        <span className="text-[10px] text-emerald-400 ml-1.5 font-bold">
                           +₹{selectedSpot.evDetails.chargerPrice}/h EV
                         </span>
                       )}
@@ -353,7 +353,7 @@ export default function ExploreTab({ spots, onBookSpot }) {
                     <button
                       type="button"
                       onClick={() => setIsPhotoOpen(true)}
-                      className="px-2.5 py-3 bg-[#0B0D10] hover:bg-[#262A34] text-gray-300 hover:text-white border border-cardBorder rounded-xl flex items-center gap-1 transition-all shadow active:scale-95 text-xs font-semibold"
+                      className="px-2.5 py-3 bg-[#151821] hover:bg-[#202532] text-gray-300 hover:text-white border border-white/10 rounded-xl flex items-center gap-1 transition-all shadow active:scale-95 text-xs font-semibold"
                       title="View all 4 spot photos"
                     >
                       <Camera className="w-4 h-4 text-brandYellow" />
@@ -362,7 +362,7 @@ export default function ExploreTab({ spots, onBookSpot }) {
 
                     <button
                       onClick={() => setIsBookingOpen(true)}
-                      className="px-5 py-3 bg-brandYellow hover:bg-brandYellow-hover text-black font-extrabold text-xs rounded-xl flex items-center gap-1.5 shadow-lg glow-yellow transition-all active:scale-95"
+                      className="px-5 py-3 bg-gradient-to-r from-amber-400 via-brandYellow to-yellow-500 hover:from-amber-300 hover:to-yellow-400 text-black font-black text-xs rounded-xl flex items-center gap-1.5 shadow-lg glow-yellow transition-all active:scale-95"
                     >
                       <span>Reserve Spot</span>
                       <ChevronRight className="w-4 h-4 stroke-[3]" />
@@ -478,17 +478,17 @@ export default function ExploreTab({ spots, onBookSpot }) {
                 setSelectedSpot(spot);
                 setIsBookingOpen(true);
               }}
-              className="bg-[#161920] border border-cardBorder hover:border-brandYellow/60 rounded-2xl p-3.5 space-y-2.5 cursor-pointer transition-all shadow-md group"
+              className="bg-gradient-to-br from-[#171A24] to-[#0F1218] border border-white/10 hover:border-brandYellow/60 rounded-2xl p-3.5 space-y-2.5 cursor-pointer transition-all duration-200 shadow-md hover:shadow-xl hover:shadow-brandYellow/5 group"
             >
               <div className="flex items-start gap-3">
                 <div className="relative flex-shrink-0">
                   <img
                     src={spot.image}
                     alt={spot.name}
-                    className="w-20 h-20 rounded-xl object-cover border border-cardBorder"
+                    className="w-20 h-20 rounded-xl object-cover border border-white/10 group-hover:scale-105 transition-transform duration-200"
                   />
                   {spot.hasEV && (
-                    <span className="absolute top-1 right-1 bg-neonGreen text-black text-[9px] p-0.5 px-1 rounded font-black flex items-center">
+                    <span className="absolute top-1 right-1 bg-emerald-400 text-black text-[9px] p-0.5 px-1 rounded-md font-black flex items-center shadow-md">
                       <Zap className="w-2.5 h-2.5 fill-current" />
                     </span>
                   )}
@@ -518,11 +518,11 @@ export default function ExploreTab({ spots, onBookSpot }) {
                   )}
                   <p className="text-[10px] text-gray-400 truncate">{spot.address}</p>
 
-                  <div className="flex items-center justify-between mt-2 pt-2 border-t border-cardBorder/60">
+                  <div className="flex items-center justify-between mt-2 pt-2 border-t border-white/10">
                     <div className="text-xs font-black text-white">
                       ₹{spot.basePrice}/hr
                       {spot.hasEV && (
-                        <span className="text-[10px] text-neonGreen font-semibold ml-1">
+                        <span className="text-[10px] text-emerald-400 font-semibold ml-1">
                           • ⚡ EV
                         </span>
                       )}
@@ -533,7 +533,7 @@ export default function ExploreTab({ spots, onBookSpot }) {
                       <button
                         type="button"
                         onClick={(e) => handleLookOnMap(spot, e)}
-                        className="px-2.5 py-1 bg-[#0B0D10] hover:bg-brandYellow/15 border border-brandYellow/40 hover:border-brandYellow text-brandYellow text-[11px] font-bold rounded-lg flex items-center gap-1 transition-all shadow-sm active:scale-95"
+                        className="px-2.5 py-1 bg-[#151821] hover:bg-brandYellow/15 border border-brandYellow/40 hover:border-brandYellow text-brandYellow text-[11px] font-bold rounded-lg flex items-center gap-1 transition-all shadow-sm active:scale-95"
                         title="Look on Map"
                       >
                         <MapPin className="w-3 h-3 text-brandYellow" />
@@ -547,7 +547,7 @@ export default function ExploreTab({ spots, onBookSpot }) {
                           setSelectedSpot(spot);
                           setIsBookingOpen(true);
                         }}
-                        className="px-2.5 py-1 bg-brandYellow hover:bg-brandYellow-hover text-black text-[11px] font-black rounded-lg flex items-center gap-0.5 shadow transition-all active:scale-95"
+                        className="px-2.5 py-1 bg-gradient-to-r from-amber-400 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 text-black text-[11px] font-black rounded-lg flex items-center gap-0.5 shadow transition-all active:scale-95"
                       >
                         <span>Reserve</span>
                         <ChevronRight className="w-3 h-3 stroke-[3]" />

@@ -144,7 +144,7 @@ export default function App() {
       <div className="fixed bottom-1/4 right-1/4 w-96 h-96 bg-neonGreen/5 rounded-full blur-3xl pointer-events-none" />
 
       {/* Main Mobile App Frame Container (max-width: 430px, rounded phone shell) */}
-      <main className="w-full sm:max-w-[430px] h-screen sm:h-[880px] bg-[#0B0D10] sm:border-2 sm:border-cardBorder sm:rounded-[42px] flex flex-col overflow-hidden shadow-2xl relative">
+      <main className="w-full sm:max-w-[430px] h-screen sm:h-[880px] bg-[#0B0D10] sm:border-2 sm:border-white/10 sm:rounded-[44px] flex flex-col overflow-hidden shadow-[0_0_60px_-15px_rgba(0,0,0,0.9)] relative ring-1 ring-white/5">
         {/* Mobile Status Bar Simulation */}
         <div className="bg-[#0B0D10] px-6 pt-3 pb-1.5 flex items-center justify-between text-xs text-gray-400 select-none z-50">
           <span className="font-semibold text-white text-[11px]">9:41</span>
