@@ -14,7 +14,6 @@ export default function ExploreTab({ spots, onBookSpot }) {
   const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [isPhotoOpen, setIsPhotoOpen] = useState(false);
   const [viewMode, setViewMode] = useState('list'); // 'list' as default view
-  const [highlightCard, setHighlightCard] = useState(false);
   const scrollRef = useRef(null);
   const headerRef = useRef(null);
   const selectedCardRef = useRef(null);

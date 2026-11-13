@@ -30,7 +30,6 @@ export default function HostSpaceTab({ onAddNewSpot }) {
   const [isLocating, setIsLocating] = useState(false);
   const [isLocationLocked, setIsLocationLocked] = useState(false);
   const [lockMethod, setLockMethod] = useState('preset'); // 'gps' | 'preset'
-  const [gpsAccuracy, setGpsAccuracy] = useState(null);
 
   // Auto-update coordinates preset when area dropdown changes (if not locked by physical GPS)
   useEffect(() => {
@@ -54,7 +53,6 @@ export default function HostSpaceTab({ onAddNewSpot }) {
           setLockedCoords({ lat, lng, address: address || `Near ${area}, Hyderabad` });
           setIsLocationLocked(true);
           setLockMethod('gps');
-          setGpsAccuracy(acc);
           setIsLocating(false);
         },
         (err) => {
@@ -63,7 +61,6 @@ export default function HostSpaceTab({ onAddNewSpot }) {
           setLockedCoords(preset);
           setIsLocationLocked(true);
           setLockMethod('preset');
-          setGpsAccuracy(12);
           setIsLocating(false);
         },
         { enableHighAccuracy: true, timeout: 8000, maximumAge: 0 }
@@ -88,7 +85,6 @@ export default function HostSpaceTab({ onAddNewSpot }) {
   const [evPrice, setEvPrice] = useState(25);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
 
   // Estimated Monthly Earnings: hourlyRate * 7 hours/day * 26 days
   const monthlyEst = hourlyRate * 7 * 24 + (hasEV ? evPrice * 4 * 20 : 0);
@@ -99,7 +95,6 @@ export default function HostSpaceTab({ onAddNewSpot }) {
 
     setTimeout(() => {
       setIsSubmitting(false);
-      setIsSuccess(true);
 
       try {
         confetti({

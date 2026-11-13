@@ -14,7 +14,7 @@ import {
   fetchSpotsFromDB, fetchActiveBookingFromDB, 
   createSpotInDB, createBookingInDB 
 } from './api/client';
-import { Wifi, Battery, Signal, Sparkles, Compass, Zap, Shield, Home, Navigation, ArrowRight, Smartphone } from 'lucide-react';
+import { Wifi, Battery, Signal, Sparkles } from 'lucide-react';
 
 export default function App() {
   const [role, setRole] = useState('driver'); // 'driver' | 'host'
@@ -62,7 +62,6 @@ export default function App() {
     upiId: 'rohit.varma@okhdfcbank',
     photo: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80',
   });
-  const [isDBConnected, setIsDBConnected] = useState(false);
 
   // Load real data from SQLite database on mount
   useEffect(() => {
@@ -71,7 +70,6 @@ export default function App() {
         const dbSpots = await fetchSpotsFromDB();
         if (dbSpots && dbSpots.length > 0) {
           setSpots(dbSpots);
-          setIsDBConnected(true);
         }
         const dbBooking = await fetchActiveBookingFromDB();
         if (dbBooking) {

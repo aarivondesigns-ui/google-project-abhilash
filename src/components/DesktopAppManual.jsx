@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { 
   Compass, Zap, Sparkles, Wallet, KeyRound, 
   Home, Crosshair, Shield, PlusCircle, TrendingUp,
-  ChevronDown, ChevronRight, ExternalLink, Play,
-  BookOpen, CheckCircle2, Layers, Cpu, Smartphone
+  ChevronDown, Play, BookOpen, CheckCircle2, 
+  Layers, Cpu, Smartphone
 } from 'lucide-react';
 
 export default function DesktopAppManual({ role, onNavigate, side }) {

@@ -11,7 +11,6 @@ export default function WalletTab() {
   const [isToppingUp, setIsToppingUp] = useState(false);
   const [topUpSuccess, setTopUpSuccess] = useState(false);
   const [selectedVehicle, setSelectedVehicle] = useState('TS09-EB-4421');
-  const [isDBSynced, setIsDBSynced] = useState(false);
 
   const [txList, setTxList] = useState([
     {
@@ -63,7 +62,6 @@ export default function WalletTab() {
           if (data.transactions && data.transactions.length > 0) {
             setTxList(data.transactions);
           }
-          setIsDBSynced(true);
         }
       } catch (err) {}
     }
