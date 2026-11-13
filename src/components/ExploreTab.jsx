@@ -94,31 +94,26 @@ export default function ExploreTab({ spots, onBookSpot }) {
 
   return (
     <div ref={scrollRef} className="flex-1 flex flex-col h-full overflow-y-auto relative no-scrollbar">
-      {/* Top Search Bar & Swiggy Filter Pills (Sticky) */}
+      {/* Top Search Bar & Filter Pills (Sticky) */}
       <div ref={headerRef} className="sticky top-0 bg-[#0B0D10]/95 backdrop-blur-md px-4 pt-3 pb-2.5 border-b border-cardBorder space-y-2.5 z-30 flex-shrink-0 shadow-lg">
-        {/* Search input with Swiggy style food placeholder */}
+        {/* Clean, Modern Search Bar */}
         <div className="relative flex items-center">
           <Search className="w-4 h-4 text-brandYellow absolute left-3.5 pointer-events-none" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search Gachibowli, Hitec City, WaveRock, EV charging..."
-            className="w-full bg-[#161920] border border-cardBorder rounded-2xl pl-10 pr-10 py-2.5 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-brandYellow transition-colors"
+            placeholder="Search areas, landmarks, or EV charging bays..."
+            className="w-full bg-[#161920] border border-cardBorder rounded-2xl pl-10 pr-9 py-2.5 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-brandYellow transition-colors shadow-inner"
           />
-          {searchQuery ? (
+          {searchQuery && (
             <button
               onClick={() => setSearchQuery('')}
-              className="absolute right-3 w-5 h-5 rounded-full bg-gray-700 text-gray-300 flex items-center justify-center text-xs"
+              className="absolute right-3 w-5 h-5 rounded-full bg-gray-700/80 hover:bg-gray-600 text-gray-300 flex items-center justify-center text-xs transition-colors"
+              title="Clear Search"
             >
               <X className="w-3 h-3" />
             </button>
-          ) : (
-            <div className="absolute right-3 flex items-center">
-              <span className="text-[10px] bg-brandYellow/15 text-brandYellow font-extrabold px-1.5 py-0.5 rounded border border-brandYellow/30">
-                HYD SMART PARKING
-              </span>
-            </div>
           )}
         </div>
 
