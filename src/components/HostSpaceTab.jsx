@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { 
-  Home, Building2, Briefcase, ShoppingBag, 
+  Home, Briefcase, ShoppingBag, 
   Zap, CheckCircle2, ArrowRight, Sparkles, 
-  Navigation, Crosshair, Lock, Loader2
+  Navigation, Crosshair, Lock, Loader2, HelpCircle
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -20,6 +20,7 @@ export default function HostSpaceTab({ onAddNewSpot }) {
 
   // Form State
   const [propertyType, setPropertyType] = useState('Home Driveway');
+  const [customPropertyType, setCustomPropertyType] = useState('');
   const [title, setTitle] = useState('');
   const [area, setArea] = useState('Gachibowli');
   const [address, setAddress] = useState('');
@@ -109,11 +110,15 @@ export default function HostSpaceTab({ onAddNewSpot }) {
         });
       } catch (err) {}
 
+      const effectiveType = propertyType === 'Other'
+        ? (customPropertyType.trim() || 'Custom Property')
+        : propertyType;
+
       const newSpotObj = {
         id: `spot-${Date.now()}`,
-        name: title.trim() || `${propertyType} (${area})`,
-        category: hasEV ? 'EV Charging' : propertyType.includes('Home') ? 'Homes' : 'Offices',
-        type: propertyType + (hasEV ? ' + EV' : ''),
+        name: title.trim() || `${effectiveType} (${area})`,
+        category: hasEV ? 'EV Charging' : effectiveType.toLowerCase().includes('home') ? 'Homes' : 'Offices',
+        type: effectiveType + (hasEV ? ' + EV' : ''),
         slotNumber: `Slot ${Math.floor(10 + Math.random() * 90)}`,
         address: address.trim() || `Plot 104, Near Main Road, ${area}, Hyderabad 500084`,
         area: area,
@@ -157,7 +162,7 @@ export default function HostSpaceTab({ onAddNewSpot }) {
           lat: lockedCoords.lat || 17.4435, 
           lng: lockedCoords.lng || 78.3582 
         },
-        image: propertyType.includes('Home')
+        image: effectiveType.toLowerCase().includes('home')
           ? 'https://images.unsplash.com/photo-1584463699042-3a33994a50d8?auto=format&fit=crop&w=800&q=80'
           : 'https://images.unsplash.com/photo-1590674899484-d5640e854abe?auto=format&fit=crop&w=800&q=80',
         totalSlots: 1,
@@ -174,7 +179,7 @@ export default function HostSpaceTab({ onAddNewSpot }) {
 
   const propertyOptions = [
     { label: 'Home Driveway', icon: Home, desc: 'Independent villa or bungalow gate' },
-    { label: 'Apartment Society', icon: Building2, desc: 'Gated community RWA slot' },
+    { label: 'Other', icon: HelpCircle, desc: 'Open plot, farmhouse, warehouse, etc.' },
     { label: 'Office Lot', icon: Briefcase, desc: 'Commercial tech park basement' },
     { label: 'Commercial / Mall', icon: ShoppingBag, desc: 'Retail store or plaza parking' },
   ];
@@ -260,8 +265,8 @@ export default function HostSpaceTab({ onAddNewSpot }) {
 
       {/* Step 1: Property Type */}
       {step === 1 && (
-        <div className="bg-gradient-to-b from-[#181C25] to-[#101319] border border-white/10 rounded-2xl p-4.5 space-y-4 shadow-xl">
-          <div className="text-xs font-bold text-gray-300 uppercase tracking-wider">
+        <div className="bg-white dark:bg-gradient-to-b dark:from-[#181C25] dark:to-[#101319] border border-gray-200 dark:border-white/10 rounded-2xl p-4.5 space-y-4 shadow-xl text-gray-900 dark:text-gray-100">
+          <div className="text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
             Step 1: Choose Property Type
           </div>
 
@@ -275,20 +280,40 @@ export default function HostSpaceTab({ onAddNewSpot }) {
                   onClick={() => setPropertyType(opt.label)}
                   className={`p-3 rounded-2xl border cursor-pointer transition-all duration-200 ${
                     isSelected
-                      ? 'bg-brandYellow/15 border-brandYellow text-white glow-yellow scale-[1.02]'
-                      : 'bg-[#151821] border-white/10 text-gray-400 hover:border-white/20 hover:text-gray-200'
+                      ? 'bg-amber-500/15 border-brandYellow text-gray-900 dark:text-white glow-yellow scale-[1.02]'
+                      : 'bg-gray-50 dark:bg-[#151821] border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:border-gray-300 dark:hover:border-white/20 hover:text-gray-900 dark:hover:text-gray-200'
                   }`}
                 >
-                  <Icon className={`w-5 h-5 mb-2 ${isSelected ? 'text-brandYellow' : 'text-gray-400'}`} />
-                  <div className="font-bold text-xs text-white">{opt.label}</div>
-                  <div className="text-[10px] text-gray-400 leading-tight mt-0.5">{opt.desc}</div>
+                  <Icon className={`w-5 h-5 mb-2 ${isSelected ? 'text-brandYellow' : 'text-gray-500 dark:text-gray-400'}`} />
+                  <div className="font-bold text-xs text-gray-900 dark:text-white">{opt.label}</div>
+                  <div className="text-[10px] text-gray-500 dark:text-gray-400 leading-tight mt-0.5">{opt.desc}</div>
                 </div>
               );
             })}
           </div>
 
+          {/* Custom Property Type Input when 'Other' is selected */}
+          {propertyType === 'Other' && (
+            <div className="p-3 bg-amber-500/10 border border-brandYellow/50 rounded-2xl space-y-1.5 animate-in fade-in slide-in-from-top-1">
+              <label className="text-xs font-bold text-amber-700 dark:text-brandYellow block">
+                Specify Property Type (Custom)
+              </label>
+              <input
+                type="text"
+                value={customPropertyType}
+                onChange={(e) => setCustomPropertyType(e.target.value)}
+                placeholder="e.g. Open Plot, Farmhouse, Warehouse, Backyard..."
+                className="w-full bg-white dark:bg-[#151821] border border-brandYellow/40 rounded-xl p-2.5 text-xs text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:border-brandYellow focus:ring-1 focus:ring-brandYellow/50 transition-all shadow-inner font-medium"
+                autoFocus
+              />
+              <p className="text-[10px] text-gray-500 dark:text-gray-400">
+                Drivers in Hyderabad will see your custom space label.
+              </p>
+            </div>
+          )}
+
           <div>
-            <label className="text-xs font-semibold text-gray-300 block mb-1">
+            <label className="text-xs font-semibold text-gray-700 dark:text-gray-300 block mb-1">
               Spot Title / Label
             </label>
             <input
@@ -296,18 +321,18 @@ export default function HostSpaceTab({ onAddNewSpot }) {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="e.g. My Gated Villa Driveway (Near DLF Gate)"
-              className="w-full bg-[#151821] border border-white/10 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-brandYellow focus:ring-1 focus:ring-brandYellow/40 transition-all shadow-inner"
+              className="w-full bg-white dark:bg-[#151821] border border-gray-200 dark:border-white/10 rounded-xl p-3 text-xs text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:border-brandYellow focus:ring-1 focus:ring-brandYellow/40 transition-all shadow-inner"
             />
           </div>
 
           <div>
-            <label className="text-xs font-semibold text-gray-300 block mb-1">
+            <label className="text-xs font-semibold text-gray-700 dark:text-gray-300 block mb-1">
               Hyderabad Locality
             </label>
             <select
               value={area}
               onChange={(e) => setArea(e.target.value)}
-              className="w-full bg-[#151821] border border-white/10 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-brandYellow focus:ring-1 focus:ring-brandYellow/40 transition-all shadow-inner"
+              className="w-full bg-white dark:bg-[#151821] border border-gray-200 dark:border-white/10 rounded-xl p-3 text-xs text-gray-900 dark:text-white focus:outline-none focus:border-brandYellow focus:ring-1 focus:ring-brandYellow/40 transition-all shadow-inner"
             >
               <option value="Gachibowli">Gachibowli (Near ORR / DLF)</option>
               <option value="Hitec City / Madhapur">Hitec City / Madhapur (Cyber Towers)</option>
@@ -319,24 +344,24 @@ export default function HostSpaceTab({ onAddNewSpot }) {
           </div>
 
           {/* GPS Location Lock Section */}
-          <div className="bg-[#0D1016] border border-white/10 rounded-2xl p-3.5 space-y-3 shadow-md">
+          <div className="bg-gray-50 dark:bg-[#0D1016] border border-gray-200 dark:border-white/10 rounded-2xl p-3.5 space-y-3 shadow-md">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <div className={`w-7 h-7 rounded-lg flex items-center justify-center ${
-                  isLocationLocked ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' : 'bg-brandYellow/20 text-brandYellow'
+                  isLocationLocked ? 'bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30' : 'bg-brandYellow/20 text-brandYellow'
                 }`}>
                   {isLocationLocked ? <Lock className="w-3.5 h-3.5" /> : <Crosshair className="w-3.5 h-3.5" />}
                 </div>
                 <div>
-                  <div className="text-xs font-bold text-white flex items-center gap-1.5">
+                  <div className="text-xs font-bold text-gray-900 dark:text-white flex items-center gap-1.5">
                     <span>GPS Spot Coordinates</span>
                     {isLocationLocked && (
-                      <span className="bg-emerald-500/20 text-emerald-400 text-[10px] font-bold px-1.5 py-0.5 rounded-full border border-emerald-500/30">
+                      <span className="bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 text-[10px] font-bold px-1.5 py-0.5 rounded-full border border-emerald-500/30">
                         ✓ Locked
                       </span>
                     )}
                   </div>
-                  <div className="text-[10px] text-gray-400">
+                  <div className="text-[10px] text-gray-500 dark:text-gray-400 font-mono">
                     {isLocationLocked 
                       ? `${lockedCoords.lat.toFixed(4)}° N, ${lockedCoords.lng.toFixed(4)}° E (${lockMethod === 'gps' ? 'Live GPS' : 'Locality Pin'})`
                       : 'Lock accurate coordinates for drivers to navigate'}
@@ -348,7 +373,7 @@ export default function HostSpaceTab({ onAddNewSpot }) {
                 type="button"
                 onClick={handleDetectGPS}
                 disabled={isLocating}
-                className="px-3 py-1.5 bg-gradient-to-r from-amber-500/20 to-yellow-500/20 hover:from-amber-500/30 hover:to-yellow-500/30 border border-brandYellow/40 rounded-xl text-[11px] font-bold text-brandYellow flex items-center gap-1.5 transition-all shadow-sm active:scale-95"
+                className="px-3 py-1.5 bg-gradient-to-r from-amber-500/20 to-yellow-500/20 hover:from-amber-500/30 hover:to-yellow-500/30 border border-brandYellow/40 rounded-xl text-[11px] font-bold text-amber-700 dark:text-brandYellow flex items-center gap-1.5 transition-all shadow-sm active:scale-95"
               >
                 {isLocating ? (
                   <>
@@ -357,7 +382,7 @@ export default function HostSpaceTab({ onAddNewSpot }) {
                   </>
                 ) : isLocationLocked ? (
                   <>
-                    <Crosshair className="w-3.5 h-3.5 text-emerald-400" />
+                    <Crosshair className="w-3.5 h-3.5 text-emerald-500 dark:text-emerald-400" />
                     <span>Re-detect GPS</span>
                   </>
                 ) : (
@@ -371,7 +396,7 @@ export default function HostSpaceTab({ onAddNewSpot }) {
 
             {/* Address / Landmark detail */}
             <div>
-              <label className="text-[11px] font-medium text-gray-400 block mb-1">
+              <label className="text-[11px] font-medium text-gray-600 dark:text-gray-400 block mb-1">
                 Street Address / Landmark (Auto-filled from locked location)
               </label>
               <input
@@ -379,7 +404,7 @@ export default function HostSpaceTab({ onAddNewSpot }) {
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
                 placeholder="Plot number, apartment name, street or gate info"
-                className="w-full bg-[#151821] border border-white/10 rounded-xl p-2.5 text-xs text-white focus:outline-none focus:border-brandYellow focus:ring-1 focus:ring-brandYellow/40 transition-all shadow-inner"
+                className="w-full bg-white dark:bg-[#151821] border border-gray-200 dark:border-white/10 rounded-xl p-2.5 text-xs text-gray-900 dark:text-white focus:outline-none focus:border-brandYellow focus:ring-1 focus:ring-brandYellow/40 transition-all shadow-inner"
               />
             </div>
           </div>
