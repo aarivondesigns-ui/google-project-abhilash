@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Zap, Clock, ShieldCheck, ChevronRight, CheckCircle2, ArrowRight, Sparkles, AlertCircle } from 'lucide-react';
+import { X, Zap, ShieldCheck, ArrowRight, Sparkles } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 export default function BookingModal({ spot, onClose, onBookingSuccess }) {

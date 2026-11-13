@@ -13,7 +13,7 @@ import {
   fetchSpotsFromDB, fetchActiveBookingFromDB, 
   createSpotInDB, createBookingInDB 
 } from './api/client';
-import { Wifi, Battery, Signal, Zap, Sparkles, CheckCircle2, Info, UserCheck, Database, LogIn } from 'lucide-react';
+import { Wifi, Battery, Signal, Sparkles } from 'lucide-react';
 
 export default function App() {
   const [role, setRole] = useState('driver'); // 'driver' | 'host'
@@ -143,60 +143,6 @@ export default function App() {
       <div className="fixed top-1/4 left-1/4 w-96 h-96 bg-brandYellow/5 rounded-full blur-3xl pointer-events-none" />
       <div className="fixed bottom-1/4 right-1/4 w-96 h-96 bg-neonGreen/5 rounded-full blur-3xl pointer-events-none" />
 
-      {/* Desktop Helper Sidebar (only visible on wide screens) */}
-      <aside className="hidden xl:flex flex-col justify-between w-80 mr-8 text-xs text-gray-400 space-y-6">
-        <div className="space-y-4">
-          <div className="flex items-center space-x-2">
-            <div className="w-9 h-9 rounded-xl bg-brandYellow text-black font-black flex items-center justify-center text-base glow-yellow">
-              P
-            </div>
-            <div>
-              <h1 className="text-lg font-black text-white tracking-tight">
-                ParkNest <span className="text-brandYellow">AI</span>
-              </h1>
-              <p className="text-[11px] text-gray-400">Hyderabad P2P Parking & EV Network</p>
-            </div>
-          </div>
-
-          <div className="bg-[#161920]/90 border border-emerald-500/40 rounded-xl p-3 text-[11px] text-gray-300">
-            <div className="text-emerald-400 font-bold mb-1 flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-neonGreen animate-pulse"></span>
-              <Database className="w-3.5 h-3.5 text-neonGreen" />
-              <span>Real SQLite Database Active</span>
-            </div>
-            <p className="text-[10px] text-gray-400">
-              Connected to <code className="text-brandYellow">parknest.db</code> on disk via Express REST API. All bookings, wallet top-ups & host listings persist.
-            </p>
-          </div>
-
-          <div className="bg-[#161920] border border-cardBorder rounded-2xl p-4 space-y-3">
-            <div className="font-bold text-white text-xs uppercase tracking-wider flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5 text-brandYellow" />
-              <span>Clean Role Isolation</span>
-            </div>
-
-            <ul className="space-y-2 text-[11px] text-gray-300">
-              <li className="flex items-start gap-1.5">
-                <span className="text-brandYellow font-bold">●</span>
-                <span><strong>Driver Mode:</strong> Explore Hyderabad map, Offers & Coupons, Wallet, Active Gate Passes. Zero clutter.</span>
-              </li>
-              <li className="flex items-start gap-1.5">
-                <span className="text-neonGreen font-bold">●</span>
-                <span><strong>Host Mode:</strong> Exclusively holds all host tools — Revenue dashboard, 3-step listing wizard, My Spots, and ANPR gate logs.</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="bg-[#161920]/80 border border-cardBorder rounded-xl p-3 text-[11px] text-gray-400">
-          <div className="text-white font-semibold mb-1 flex items-center gap-1">
-            <Info className="w-3 h-3 text-brandYellow" />
-            <span>Switch Roles Anytime</span>
-          </div>
-          Use the top-right header switcher to toggle between Driver and Host portals.
-        </div>
-      </aside>
-
       {/* Main Mobile App Frame Container (max-width: 430px, rounded phone shell) */}
       <main className="w-full sm:max-w-[430px] h-screen sm:h-[880px] bg-[#0B0D10] sm:border-2 sm:border-cardBorder sm:rounded-[42px] flex flex-col overflow-hidden shadow-2xl relative">
         {/* Mobile Status Bar Simulation */}
@@ -319,27 +265,6 @@ export default function App() {
           onClose={() => setIsSupportOpen(false)}
         />
       </main>
-
-      {/* Desktop Right Quick Tips (only visible on wide screens) */}
-      <aside className="hidden xl:flex flex-col justify-start w-80 ml-8 text-xs text-gray-400 space-y-4">
-        <div className="bg-[#161920] border border-cardBorder rounded-2xl p-4 space-y-3">
-          <div className="font-bold text-white text-xs uppercase tracking-wider flex items-center gap-1.5">
-            <Zap className="w-3.5 h-3.5 text-neonGreen" />
-            <span>Dedicated User Experience</span>
-          </div>
-
-          <div className="space-y-2.5 text-[11px] text-gray-300">
-            <div>
-              <div className="text-white font-bold">1. Driver Navigation</div>
-              <p className="text-gray-400">Explore Map • Offers & Coupons • Wallet • My Bookings Pass.</p>
-            </div>
-            <div>
-              <div className="text-white font-bold">2. Host Navigation</div>
-              <p className="text-gray-400">Earnings Overview • List Space Wizard • My Spots • Gate Telemetry.</p>
-            </div>
-          </div>
-        </div>
-      </aside>
     </div>
   );
 }

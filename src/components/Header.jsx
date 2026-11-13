@@ -1,5 +1,5 @@
 import React from 'react';
-import { Shield, Sparkles, User, Car, Store, MapPin, Zap, UserCheck, Sun, Moon, Settings } from 'lucide-react';
+import { User, Car, Store, MapPin, UserCheck, Sun, Moon, Settings } from 'lucide-react';
 
 export default function Header({ 
   role, 

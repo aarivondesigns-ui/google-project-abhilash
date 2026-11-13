@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { 
-  QrCode, KeyRound, Navigation, Phone, Clock, AlertTriangle, 
-  CheckCircle2, Zap, Shield, ArrowUpRight, Copy, Share2, Sparkles, AlertOctagon, Camera 
+  KeyRound, Navigation, Phone, Clock, AlertTriangle, 
+  CheckCircle2, Zap, Copy, AlertOctagon, Camera 
 } from 'lucide-react';
 import OverstaySimulationModal from './OverstaySimulationModal';
 import PhotoModal from './PhotoModal';

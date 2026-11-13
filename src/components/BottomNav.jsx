@@ -1,7 +1,7 @@
 import React from 'react';
 import { 
   Compass, Wallet, KeyRound, Tag, PlusCircle, 
-  TrendingUp, Building2, Shield, DollarSign 
+  TrendingUp, Building2, Shield 
 } from 'lucide-react';
 
 export default function BottomNav({ role, activeTab, onTabChange, hasActiveBooking }) {

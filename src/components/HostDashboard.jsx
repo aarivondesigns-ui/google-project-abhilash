@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { 
-  DollarSign, TrendingUp, Shield, KeyRound, CheckCircle2, 
-  Clock, Power, Bell, ArrowUpRight, Zap, UserCheck, Smartphone, PlusCircle, Building2, Layers, Database
+  CheckCircle2, Power, ArrowUpRight, PlusCircle
 } from 'lucide-react';
 import HostSpaceTab from './HostSpaceTab';
 import { fetchHostDataFromDB, withdrawHostPayoutFromDB } from '../api/client';

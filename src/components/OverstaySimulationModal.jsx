@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { 
   X, AlertTriangle, ShieldAlert, CheckCircle2, ArrowRight, 
-  RotateCcw, DollarSign, Navigation, PhoneCall, Bell, RefreshCw, Zap
+  RotateCcw, DollarSign, Navigation, Bell, RefreshCw
 } from 'lucide-react';
 
 export default function OverstaySimulationModal({ booking, onClose, onResolveConflict }) {

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { 
-  Home, Building2, Briefcase, ShoppingBag, Calendar, 
-  Clock, DollarSign, Zap, CheckCircle2, ArrowRight, Sparkles, MapPin,
-  Navigation, Crosshair, Lock, Unlock, Loader2
+  Home, Building2, Briefcase, ShoppingBag, 
+  Zap, CheckCircle2, ArrowRight, Sparkles, 
+  Navigation, Crosshair, Lock, Loader2
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 

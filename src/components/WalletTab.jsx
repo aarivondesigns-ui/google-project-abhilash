@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { 
-  Wallet, CreditCard, Plus, ArrowUpRight, ArrowDownLeft, ShieldCheck, 
-  Car, Zap, Smartphone, CheckCircle2, ChevronRight, RefreshCw, AlertCircle, Copy, Database 
+  Wallet, ArrowUpRight, ArrowDownLeft, ShieldCheck, Car, Zap
 } from 'lucide-react';
 import { fetchWalletFromDB, topUpWalletInDB } from '../api/client';
 

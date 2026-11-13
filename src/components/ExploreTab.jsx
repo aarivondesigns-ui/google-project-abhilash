@@ -1,8 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { 
-  Search, SlidersHorizontal, MapPin, Star, Zap, Shield, 
-  Clock, Navigation, Sparkles, CheckCircle2, ChevronRight, Map, List, X,
-  UtensilsCrossed, Coffee, Tag, Gift, Camera
+  Search, MapPin, Star, Zap, Shield, 
+  Navigation, Sparkles, ChevronRight, Map, List, X, Camera
 } from 'lucide-react';
 import MapCanvas from './MapCanvas';
 import BookingModal from './BookingModal';

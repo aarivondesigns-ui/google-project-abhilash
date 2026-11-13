@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { 
-  X, Smartphone, ArrowRight, ShieldCheck, Sparkles, CheckCircle2, 
-  Car, Building2, Shield, KeyRound, Bell, RefreshCw 
+  X, ArrowRight, CheckCircle2, Car, Bell, RefreshCw 
 } from 'lucide-react';
 
 export default function LoginModal({ isOpen, onClose, onLoginSuccess }) {

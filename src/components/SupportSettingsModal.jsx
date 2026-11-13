@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { 
   X, Settings, AlertTriangle, HelpCircle, Phone, MessageSquare, 
-  Shield, Bell, Car, Check, ChevronDown, ChevronRight, FileText, 
-  Camera, Send, CheckCircle2, RefreshCw, Smartphone, Download, Globe, Sparkles
+  Shield, Car, Check, ChevronDown, FileText, 
+  Camera, Send, CheckCircle2, RefreshCw, Download, Globe, Sparkles
 } from 'lucide-react';
 
 export default function SupportSettingsModal({ 

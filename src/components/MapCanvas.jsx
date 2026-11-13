@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import L from 'leaflet';
-import { Navigation, Plus, Minus, LocateFixed, MapPin, Zap } from 'lucide-react';
+import { Navigation, Plus, Minus, LocateFixed } from 'lucide-react';
 
 export default function MapCanvas({ spots, selectedSpot, onSelectSpot }) {
   // Mode: 'google' (Google Maps Dark Roadmap) | 'satellite' (Google Hybrid Satellite) | 'mappls' (Mappls Live India SDK)

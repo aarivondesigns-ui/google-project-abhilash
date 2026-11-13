@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, ChevronLeft, ChevronRight, Camera, ShieldCheck, MapPin, Zap } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight, Camera } from 'lucide-react';
 
 export default function PhotoModal({ title, spot, initialCategory = 'all', onClose }) {
   // Generate 100% unique, customized photo sets for every specific Hyderabad venue

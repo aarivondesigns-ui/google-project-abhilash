@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { 
-  Tag, Percent, Zap, Sparkles, Copy, CheckCircle2, 
-  ArrowRight, ShieldCheck, Clock, Award, Filter, 
-  Flame, Check
+  Tag, Sparkles, Copy, CheckCircle2, 
+  ArrowRight, ShieldCheck, Flame, Check
 } from 'lucide-react';
 
 export default function OffersTab({ onSelectSpotToBook, onSwitchToExplore }) {
