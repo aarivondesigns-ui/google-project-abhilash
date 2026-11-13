@@ -100,11 +100,11 @@ export default function BookingModal({ spot, onClose, onBookingSuccess }) {
                 <span className="text-xs font-bold" style={{ color: spot.aiStatusColor }}>
                   {spot.aiProbability}% AI Availability Confidence
                 </span>
-                <span className="text-[10px] bg-black/40 px-1.5 py-0.5 rounded text-gray-300">
+                <span className="text-[10px] bg-black/10 dark:bg-black/40 px-1.5 py-0.5 rounded text-gray-700 dark:text-gray-300 font-semibold">
                   {spot.aiStatus}
                 </span>
               </div>
-              <p className="text-[11px] text-gray-300 mt-0.5 leading-snug">
+              <p className="text-[11px] text-gray-600 dark:text-gray-300 mt-0.5 leading-snug">
                 {spot.aiInsight}
               </p>
             </div>
@@ -156,51 +156,53 @@ export default function BookingModal({ spot, onClose, onBookingSuccess }) {
             </div>
           </div>
 
-          {/* 2. Swiggy-Style Dining VIP Perk Section (if restaurant/cafe) */}
+          {/* 2. Auto-Gate Clearance Included Perk Section */}
           {(spot.bayPerk || spot.parkingPerk || spot.swiggyPerk || spot.tag) && (
-            <div className="border border-brandYellow/40 bg-gradient-to-br from-brandYellow/10 via-[#0B0D10] to-[#161920] rounded-2xl p-3.5 space-y-1.5">
+            <div className="border border-amber-400/40 dark:border-brandYellow/30 bg-amber-500/10 dark:bg-brandYellow/[0.08] rounded-2xl p-3.5 space-y-1.5 transition-all shadow-sm">
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-xl bg-brandYellow/20 text-brandYellow flex items-center justify-center text-sm shadow-sm">
+                <div className="flex items-center gap-2.5 min-w-0">
+                  <div className="w-8 h-8 rounded-xl bg-amber-500/20 text-amber-600 dark:text-brandYellow flex items-center justify-center text-sm shadow-sm flex-shrink-0">
                     🛡️
                   </div>
-                  <div>
-                    <div className="flex items-center gap-1.5">
-                      <span className="text-xs font-bold text-white">
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-1.5 flex-wrap">
+                      <span className="text-xs font-bold text-gray-900 dark:text-white">
                         ParkNest Auto-Gate Clearance Included
                       </span>
-                      <span className="text-[9px] bg-brandYellow/20 text-brandYellow font-extrabold px-1.5 py-0.5 rounded border border-brandYellow/30">
+                      <span className="text-[9px] bg-amber-500/20 text-amber-700 dark:text-brandYellow font-black px-1.5 py-0.5 rounded-md border border-amber-500/30">
                         VERIFIED BAY
                       </span>
                     </div>
-                    <p className="text-[11px] text-gray-300 mt-0.5">
-                      {spot.bayPerk || spot.parkingPerk || spot.swiggyPerk || 'Automatic barrier ANPR sensor scan & guaranteed slot reservation'}
+                    <p className="text-[11px] text-gray-600 dark:text-gray-300 mt-0.5 leading-snug">
+                      {spot.bayPerk || spot.parkingPerk || spot.swiggyPerk || 'ANPR fast barrier entry and 24×7 guarded basement slot'}
                     </p>
                   </div>
                 </div>
-                <span className="text-xs font-black text-brandYellow whitespace-nowrap">FREE</span>
+                <span className="text-xs font-black text-amber-600 dark:text-brandYellow whitespace-nowrap ml-2 flex-shrink-0">
+                  FREE
+                </span>
               </div>
             </div>
           )}
 
-          {/* 3. Swiggy-Style EV Add-On Section */}
+          {/* 3. EV Fast Charging Add-On Section */}
           {spot.hasEV && spot.evDetails && (
-            <div className="border border-neonGreen/40 bg-gradient-to-br from-neonGreen/10 via-[#0B0D10] to-[#161920] rounded-2xl p-4 space-y-3 relative overflow-hidden">
+            <div className="border border-emerald-400/40 dark:border-neonGreen/30 bg-emerald-500/10 dark:bg-neonGreen/[0.08] rounded-2xl p-4 space-y-3 relative overflow-hidden transition-all shadow-sm">
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-xl bg-neonGreen/20 text-neonGreen flex items-center justify-center border border-neonGreen/40">
+                <div className="flex items-center gap-2.5 min-w-0">
+                  <div className="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-600 dark:text-neonGreen flex items-center justify-center border border-emerald-500/30 flex-shrink-0">
                     <Zap className="w-4 h-4 fill-current" />
                   </div>
-                  <div>
-                    <div className="flex items-center gap-1.5">
-                      <span className="text-xs font-bold text-white">
-                        Swiggy-Style EV Add-on
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-1.5 flex-wrap">
+                      <span className="text-xs font-bold text-gray-900 dark:text-white">
+                        EV Fast Charging Add-on
                       </span>
-                      <span className="text-[9px] bg-neonGreen/20 text-neonGreen font-semibold px-1.5 py-0.5 rounded-full border border-neonGreen/30">
+                      <span className="text-[9px] bg-emerald-500/20 text-emerald-700 dark:text-neonGreen font-black px-1.5 py-0.5 rounded-full border border-emerald-500/30">
                         ⚡ LIVE DISCOVERY
                       </span>
                     </div>
-                    <p className="text-[11px] text-gray-300">
+                    <p className="text-[11px] text-gray-600 dark:text-gray-300 mt-0.5 leading-snug">
                       Charge while parked at ₹{spot.evDetails.chargerPrice}/hr
                     </p>
                   </div>

@@ -20,7 +20,7 @@ export default function OffersTab({ onSelectSpotToBook, onSwitchToExplore }) {
       discount: '50% OFF',
       savings: 'Up to ₹50',
       tag: 'WELCOME DEAL',
-      minDuration: 'Min. 1 hr booking',
+      minDuration: 'Min. 1 hr',
       validTill: 'Valid for next 14 days',
       terms: 'Applicable once per user on all covered & open bays.',
       color: 'from-amber-500/20 to-brandYellow/10 border-brandYellow/50 text-brandYellow',
@@ -33,7 +33,7 @@ export default function OffersTab({ onSelectSpotToBook, onSwitchToExplore }) {
       discount: '₹25 CASHBACK',
       savings: 'Direct to Wallet',
       tag: 'AUTO PASS',
-      minDuration: 'ANPR sensor exit',
+      minDuration: 'Auto Exit',
       validTill: 'Auto-credited instantly',
       terms: 'Instant wallet cashback upon automated exit barrier scan.',
       color: 'from-emerald-500/20 to-teal-500/10 border-emerald-500/50 text-neonGreen',
@@ -46,7 +46,7 @@ export default function OffersTab({ onSelectSpotToBook, onSwitchToExplore }) {
       discount: '₹100 CREDIT',
       savings: 'Free 5-8 kWh charge',
       tag: 'SUPERCHARGER',
-      minDuration: 'Min 45 min EV session',
+      minDuration: '45+ min EV',
       validTill: 'Valid all month',
       terms: 'Applicable at WaveRock, Knowledge City, and Inorbit EV hubs.',
       color: 'from-green-500/20 to-emerald-500/10 border-neonGreen/60 text-neonGreen',
@@ -59,7 +59,7 @@ export default function OffersTab({ onSelectSpotToBook, onSwitchToExplore }) {
       discount: '₹150 OFF',
       savings: 'On 24hr+ bookings',
       tag: 'AIRPORT TERMINAL',
-      minDuration: 'Min. 24 hr booking',
+      minDuration: 'Min. 24 hrs',
       validTill: 'Valid till month end',
       terms: 'Pre-book at least 2 hours before flight check-in.',
       color: 'from-blue-500/20 to-indigo-500/10 border-blue-500/50 text-blue-400',
@@ -72,7 +72,7 @@ export default function OffersTab({ onSelectSpotToBook, onSwitchToExplore }) {
       discount: 'FLAT ₹15/hr',
       savings: 'Save ₹30/hr',
       tag: 'NIGHT RATE',
-      minDuration: '10:00 PM – 5:00 AM',
+      minDuration: '10 PM – 5 AM',
       validTill: 'Active every night',
       terms: 'Applicable between 10 PM and 5 AM at 24x7 gated premises.',
       color: 'from-purple-500/20 to-pink-500/10 border-purple-500/50 text-purple-400',
@@ -85,7 +85,7 @@ export default function OffersTab({ onSelectSpotToBook, onSwitchToExplore }) {
       discount: '30% OFF',
       savings: 'Up to ₹75',
       tag: 'WEEKEND SPECIAL',
-      minDuration: 'Saturday & Sunday',
+      minDuration: 'Sat & Sun',
       validTill: 'Valid this weekend',
       terms: 'Guaranteed reserved bay with priority entry pass.',
       color: 'from-orange-500/20 to-amber-500/10 border-orange-500/50 text-orange-400',
@@ -98,7 +98,7 @@ export default function OffersTab({ onSelectSpotToBook, onSwitchToExplore }) {
       discount: '₹500 OFF',
       savings: 'Monthly subscription',
       tag: 'WORKDAY PASS',
-      minDuration: '30-day corporate pass',
+      minDuration: '30-Day Pass',
       validTill: 'Limited slots left',
       terms: 'Includes reserved personalized stall badge and 24x7 security.',
       color: 'from-cyan-500/20 to-blue-500/10 border-cyan-500/50 text-cyan-400',
@@ -111,7 +111,7 @@ export default function OffersTab({ onSelectSpotToBook, onSwitchToExplore }) {
       discount: '₹20 OFF',
       savings: 'Daily Commute',
       tag: 'METRO COMMUTE',
-      minDuration: 'Min 2 hrs parking',
+      minDuration: 'Min. 2 hrs',
       validTill: 'Monday to Friday',
       terms: 'Stall located within 100 meters of Hyderabad Metro entry.',
       color: 'from-teal-500/20 to-emerald-500/10 border-teal-500/50 text-teal-400',
@@ -124,7 +124,7 @@ export default function OffersTab({ onSelectSpotToBook, onSwitchToExplore }) {
       discount: 'FREE VALET',
       savings: '₹50 fee waived',
       tag: 'VALET ASSIST',
-      minDuration: 'All Jubilee Hills lots',
+      minDuration: 'Jubilee Hills',
       validTill: 'Available daily',
       terms: 'Trained professional valets with digital handover inspection.',
       color: 'from-brandYellow/20 to-amber-500/10 border-brandYellow/60 text-brandYellow',
@@ -137,7 +137,7 @@ export default function OffersTab({ onSelectSpotToBook, onSwitchToExplore }) {
       discount: '100% FEE WAIVER',
       savings: 'Zero extra charge',
       tag: 'NO CONVENIENCE FEE',
-      minDuration: 'All bookings',
+      minDuration: 'All Bookings',
       validTill: 'Auto-activates',
       terms: 'Enjoy wholesale parking rates direct from space owners.',
       color: 'from-emerald-500/20 to-green-500/10 border-emerald-500/50 text-emerald-400',
@@ -309,12 +309,14 @@ export default function OffersTab({ onSelectSpotToBook, onSwitchToExplore }) {
               </div>
 
               {/* Terms Badge */}
-              <div className="p-2 rounded-xl bg-[#0B0D10] border border-cardBorder/80 text-[10px] text-gray-300 flex items-center justify-between">
-                <div className="flex items-center gap-1.5">
-                  <ShieldCheck className="w-3.5 h-3.5 text-neonGreen shrink-0" />
-                  <span className="truncate">{coupon.terms}</span>
+              <div className="p-2.5 rounded-xl bg-gray-50 dark:bg-[#0B0D10] border border-gray-200 dark:border-cardBorder/80 text-[10px] text-gray-700 dark:text-gray-300 flex items-center justify-between gap-2 overflow-hidden shadow-sm">
+                <div className="flex items-center gap-1.5 min-w-0 flex-1">
+                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 dark:text-neonGreen shrink-0" />
+                  <span className="truncate font-medium">{coupon.terms}</span>
                 </div>
-                <span className="text-[9px] text-gray-500 shrink-0 ml-2 font-mono">{coupon.minDuration}</span>
+                <span className="text-[9.5px] text-gray-600 dark:text-gray-400 font-mono shrink-0 whitespace-nowrap bg-gray-200/70 dark:bg-white/5 px-2 py-0.5 rounded-md border border-gray-300/70 dark:border-white/10">
+                  {coupon.minDuration}
+                </span>
               </div>
 
               {/* Coupon Code Action Strip */}
