@@ -216,46 +216,80 @@ export default function HostSpaceTab({ onAddNewSpot, onInspect, onManualClick })
       </div>
 
       {/* 3-Step Wizard Indicator */}
-      <div className="flex items-center justify-between bg-[#161920] border border-cardBorder rounded-2xl p-2.5 px-4 text-xs">
-        <div
+      <div className="flex items-center justify-between bg-white dark:bg-[#161920] border border-gray-200 dark:border-cardBorder rounded-2xl p-2.5 px-3.5 text-xs shadow-sm select-none">
+        {/* Step 1: Property */}
+        <button
+          type="button"
           onClick={() => setStep(1)}
-          className={`cursor-pointer flex items-center gap-1.5 font-bold ${
-            step === 1 ? 'text-brandYellow' : 'text-gray-400'
-          }`}
+          className="flex items-center gap-1.5 font-bold cursor-pointer transition-all active:scale-95 group focus:outline-none"
         >
-          <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] ${
-            step === 1 ? 'bg-brandYellow text-black' : 'bg-gray-800 text-gray-300'
-          }`}>1</span>
-          <span>Property</span>
-        </div>
+          <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-black transition-all ${
+            step === 1 
+              ? 'bg-brandYellow text-black shadow-md glow-yellow scale-105' 
+              : step > 1
+              ? 'bg-emerald-500 text-black font-black'
+              : 'bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-200'
+          }`}>
+            {step > 1 ? '✓' : '1'}
+          </span>
+          <span className={`text-[11px] whitespace-nowrap transition-colors ${
+            step === 1 ? 'text-amber-600 dark:text-brandYellow font-black' : 'text-gray-500 dark:text-gray-400'
+          }`}>
+            Property
+          </span>
+        </button>
 
-        <div className="w-6 h-0.5 bg-cardBorder" />
+        {/* Flexible Line Connector 1-2 */}
+        <div className={`flex-1 h-0.5 mx-2 rounded-full transition-colors ${
+          step >= 2 ? 'bg-brandYellow' : 'bg-gray-200 dark:bg-cardBorder'
+        }`} />
 
-        <div
+        {/* Step 2: Schedule */}
+        <button
+          type="button"
           onClick={() => setStep(2)}
-          className={`cursor-pointer flex items-center gap-1.5 font-bold ${
-            step === 2 ? 'text-brandYellow' : 'text-gray-400'
-          }`}
+          className="flex items-center gap-1.5 font-bold cursor-pointer transition-all active:scale-95 group focus:outline-none"
         >
-          <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] ${
-            step === 2 ? 'bg-brandYellow text-black' : 'bg-gray-800 text-gray-300'
-          }`}>2</span>
-          <span>Schedule & Rate</span>
-        </div>
+          <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-black transition-all ${
+            step === 2 
+              ? 'bg-brandYellow text-black shadow-md glow-yellow scale-105' 
+              : step > 2
+              ? 'bg-emerald-500 text-black font-black'
+              : 'bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-200'
+          }`}>
+            {step > 2 ? '✓' : '2'}
+          </span>
+          <span className={`text-[11px] whitespace-nowrap transition-colors ${
+            step === 2 ? 'text-amber-600 dark:text-brandYellow font-black' : 'text-gray-500 dark:text-gray-400'
+          }`}>
+            Schedule
+          </span>
+        </button>
 
-        <div className="w-6 h-0.5 bg-cardBorder" />
+        {/* Flexible Line Connector 2-3 */}
+        <div className={`flex-1 h-0.5 mx-2 rounded-full transition-colors ${
+          step >= 3 ? 'bg-brandYellow' : 'bg-gray-200 dark:bg-cardBorder'
+        }`} />
 
-        <div
+        {/* Step 3: EV Charger */}
+        <button
+          type="button"
           onClick={() => setStep(3)}
-          className={`cursor-pointer flex items-center gap-1.5 font-bold ${
-            step === 3 ? 'text-brandYellow' : 'text-gray-400'
-          }`}
+          className="flex items-center gap-1.5 font-bold cursor-pointer transition-all active:scale-95 group focus:outline-none"
         >
-          <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] ${
-            step === 3 ? 'bg-brandYellow text-black' : 'bg-gray-800 text-gray-300'
-          }`}>3</span>
-          <span>EV Charger</span>
-        </div>
+          <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-black transition-all ${
+            step === 3 
+              ? 'bg-brandYellow text-black shadow-md glow-yellow scale-105' 
+              : 'bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-200'
+          }`}>
+            3
+          </span>
+          <span className={`text-[11px] whitespace-nowrap transition-colors ${
+            step === 3 ? 'text-amber-600 dark:text-brandYellow font-black' : 'text-gray-500 dark:text-gray-400'
+          }`}>
+            EV Setup
+          </span>
+        </button>
       </div>
 
       {/* Step 1: Property Type */}
