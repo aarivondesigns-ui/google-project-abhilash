@@ -9,12 +9,18 @@ export default function Header({
   currentUser,
   theme = 'dark',
   onToggleTheme,
-  onOpenSupportSettings
+  onOpenSupportSettings,
+  onInspect,
+  onManualClick
 }) {
   return (
     <header className="sticky top-0 bg-[#0B0D10]/95 backdrop-blur-md border-b border-cardBorder px-3 py-2 flex items-center justify-between z-40 select-none">
       {/* Brand Logo & Hyderabad Tag */}
-      <div className="flex items-center space-x-2 shrink-0">
+      <div 
+        className="flex items-center space-x-2 shrink-0 cursor-pointer"
+        onMouseEnter={() => onInspect?.('role-switcher')}
+        onClick={() => onManualClick?.('role-switcher')}
+      >
         <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-brandYellow to-amber-500 text-black flex items-center justify-center font-black text-sm shadow-md glow-yellow flex-shrink-0">
           P
         </div>
@@ -42,9 +48,15 @@ export default function Header({
       {/* Right Controls: [Role Switcher] -> [Profile] -> [Theme] -> [Settings (LAST)] */}
       <div className="flex items-center gap-1.5">
         {/* 1. Primary Role Switcher: Driver | Host */}
-        <div className="flex items-center bg-[#161920] border border-cardBorder p-0.5 rounded-xl shadow-inner text-xs">
+        <div 
+          className="flex items-center bg-[#161920] border border-cardBorder p-0.5 rounded-xl shadow-inner text-xs"
+          onMouseEnter={() => onInspect?.('role-switcher')}
+        >
           <button
-            onClick={() => onRoleChange('driver')}
+            onClick={() => {
+              onRoleChange('driver');
+              onManualClick?.('role-switcher');
+            }}
             className={`flex items-center gap-1 px-2 py-1 rounded-lg font-bold transition-all ${
               role === 'driver'
                 ? 'bg-brandYellow text-black shadow-md glow-yellow'
@@ -57,7 +69,10 @@ export default function Header({
           </button>
 
           <button
-            onClick={() => onRoleChange('host')}
+            onClick={() => {
+              onRoleChange('host');
+              onManualClick?.('role-switcher');
+            }}
             className={`flex items-center gap-1 px-2 py-1 rounded-lg font-bold transition-all ${
               role === 'host'
                 ? 'bg-neonGreen text-black shadow-md glow-green'
@@ -91,6 +106,7 @@ export default function Header({
         {/* 3. Theme Quick Switcher (Light / Dark) */}
         <button
           onClick={onToggleTheme}
+          onMouseEnter={() => onInspect?.('theme-toggle')}
           className="w-7 h-7 rounded-xl bg-[#161920] border border-cardBorder hover:border-brandYellow text-gray-200 hover:text-white transition-all flex items-center justify-center text-xs shadow-sm active:scale-95 flex-shrink-0"
           title={`Switch to ${theme === 'light' ? 'Dark' : 'Light'} Mode`}
         >

@@ -4,7 +4,7 @@ import {
   TrendingUp, Building2, Shield 
 } from 'lucide-react';
 
-export default function BottomNav({ role, activeTab, onTabChange, hasActiveBooking }) {
+export default function BottomNav({ role, activeTab, onTabChange, hasActiveBooking, onInspect, onManualClick }) {
   const driverTabs = [
     { id: 'explore', label: 'Explore', icon: Compass },
     { id: 'offers', label: 'Offers', icon: Tag, badge: '10' },
@@ -19,6 +19,17 @@ export default function BottomNav({ role, activeTab, onTabChange, hasActiveBooki
     { id: 'logs', label: 'Gate Logs', icon: Shield },
   ];
 
+  const manualKeyMap = {
+    explore: 'nav-explore',
+    offers: 'nav-offers',
+    wallet: 'nav-wallet',
+    bookings: 'nav-bookings',
+    overview: 'host-earnings-card',
+    list: 'host-property-type',
+    listings: 'host-property-type',
+    logs: 'host-gate-logs',
+  };
+
   const tabs = role === 'host' ? hostTabs : driverTabs;
   const activeColor = role === 'host' ? 'text-emerald-600 dark:text-neonGreen' : 'text-amber-600 dark:text-brandYellow';
   const pillColor = role === 'host' ? 'bg-emerald-500 dark:bg-neonGreen glow-green' : 'bg-amber-500 dark:bg-brandYellow glow-yellow';
@@ -28,11 +39,16 @@ export default function BottomNav({ role, activeTab, onTabChange, hasActiveBooki
       {tabs.map((tab) => {
         const Icon = tab.icon;
         const isActive = activeTab === tab.id;
+        const manualKey = manualKeyMap[tab.id];
 
         return (
           <button
             key={tab.id}
-            onClick={() => onTabChange(tab.id)}
+            onClick={() => {
+              onTabChange(tab.id);
+              onManualClick?.(manualKey);
+            }}
+            onMouseEnter={() => onInspect?.(manualKey)}
             className={`flex flex-col items-center justify-center flex-1 py-1 px-1 rounded-xl transition-all relative group ${
               isActive
                 ? `${activeColor} font-black`

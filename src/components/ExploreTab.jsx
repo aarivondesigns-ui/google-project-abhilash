@@ -7,7 +7,7 @@ import MapCanvas from './MapCanvas';
 import BookingModal from './BookingModal';
 import PhotoModal from './PhotoModal';
 
-export default function ExploreTab({ spots, onBookSpot }) {
+export default function ExploreTab({ spots, onBookSpot, onInspect, onManualClick }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [activeFilter, setActiveFilter] = useState('All');
   const [selectedSpot, setSelectedSpot] = useState(spots[0]);
@@ -106,7 +106,11 @@ export default function ExploreTab({ spots, onBookSpot }) {
       {/* Top Search Bar & Filter Pills (Sticky) */}
       <div ref={headerRef} className="sticky top-0 bg-[#0B0D10]/95 backdrop-blur-md px-4 pt-3 pb-2.5 border-b border-cardBorder space-y-2.5 z-30 flex-shrink-0 shadow-lg">
         {/* Clean, Modern Search Bar */}
-        <div className="relative flex items-center">
+        <div 
+          className="relative flex items-center"
+          onMouseEnter={() => onInspect?.('search-bar')}
+          onClick={() => onManualClick?.('search-bar')}
+        >
           <Search className="w-4 h-4 text-brandYellow absolute left-3.5 pointer-events-none" />
           <input
             type="text"
@@ -128,13 +132,19 @@ export default function ExploreTab({ spots, onBookSpot }) {
 
         {/* Swiggy Style Filter Pills with View Switcher */}
         <div className="flex items-center justify-between gap-2 overflow-x-auto no-scrollbar py-0.5">
-          <div className="flex items-center gap-1.5 flex-1 overflow-x-auto no-scrollbar">
+          <div 
+            className="flex items-center gap-1.5 flex-1 overflow-x-auto no-scrollbar"
+            onMouseEnter={() => onInspect?.('filter-pills')}
+          >
             {filters.map((filter) => {
               const isActive = activeFilter === filter.id;
               return (
                 <button
                   key={filter.id}
-                  onClick={() => setActiveFilter(filter.id)}
+                  onClick={() => {
+                    setActiveFilter(filter.id);
+                    onManualClick?.('filter-pills');
+                  }}
                   className={`px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap shrink-0 transition-all flex items-center gap-1 border ${
                     isActive
                       ? 'bg-brandYellow text-black border-brandYellow glow-yellow font-bold shadow-md'
@@ -149,7 +159,11 @@ export default function ExploreTab({ spots, onBookSpot }) {
 
           {/* Toggle Map / List button */}
           <button
-            onClick={() => setViewMode(viewMode === 'map' ? 'list' : 'map')}
+            onClick={() => {
+              setViewMode(viewMode === 'map' ? 'list' : 'map');
+              onManualClick?.('view-toggle');
+            }}
+            onMouseEnter={() => onInspect?.('view-toggle')}
             className="w-8 h-8 rounded-xl bg-[#161920] border border-cardBorder text-gray-300 hover:text-white flex items-center justify-center flex-shrink-0 transition-all shadow active:scale-95"
             title="Toggle View"
           >
@@ -160,7 +174,10 @@ export default function ExploreTab({ spots, onBookSpot }) {
 
       {/* Main View Area: Map View or List View */}
       {viewMode === 'map' ? (
-        <div className="flex flex-col">
+        <div 
+          className="flex flex-col"
+          onMouseEnter={() => onInspect?.('map-canvas')}
+        >
           {/* Hyderabad Interactive Map Canvas (Scrolls with the feed) */}
           <div className="h-[260px] w-full flex-shrink-0 relative border-b border-cardBorder isolate z-0">
             <MapCanvas

@@ -5,7 +5,7 @@ import {
 import HostSpaceTab from './HostSpaceTab';
 import { fetchHostDataFromDB, withdrawHostPayoutFromDB } from '../api/client';
 
-export default function HostDashboard({ spots, onSwitchToDriverMode, onAddNewSpot, hostActiveTab, onHostTabChange }) {
+export default function HostDashboard({ spots, onSwitchToDriverMode, onAddNewSpot, hostActiveTab, onHostTabChange, onInspect, onManualClick }) {
   const [internalTab, setInternalTab] = useState('overview'); // 'overview' | 'list' | 'listings' | 'logs'
   const currentTab = hostActiveTab || internalTab;
   const setTab = onHostTabChange || setInternalTab;
@@ -97,7 +97,11 @@ export default function HostDashboard({ spots, onSwitchToDriverMode, onAddNewSpo
       {currentTab === 'overview' && (
         <div className="space-y-4 animate-in fade-in duration-150">
           {/* Host Revenue Card */}
-          <div className="bg-white dark:bg-gradient-to-br dark:from-[#161920] dark:via-[#10141D] dark:to-[#0B0D10] border border-gray-200 dark:border-cardBorder rounded-3xl p-5 shadow-2xl relative overflow-hidden host-revenue-card">
+          <div 
+            className="bg-white dark:bg-gradient-to-br dark:from-[#161920] dark:via-[#10141D] dark:to-[#0B0D10] border border-gray-200 dark:border-cardBorder rounded-3xl p-5 shadow-2xl relative overflow-hidden host-revenue-card cursor-pointer"
+            onMouseEnter={() => onInspect?.('host-earnings-card')}
+            onClick={() => onManualClick?.('host-earnings-card')}
+          >
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-2">
                 <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
@@ -200,7 +204,11 @@ export default function HostDashboard({ spots, onSwitchToDriverMode, onAddNewSpo
       {/* 2. LIST SPACE TAB (Inside Host Mode!) */}
       {currentTab === 'list' && (
         <div className="animate-in fade-in duration-150">
-          <HostSpaceTab onAddNewSpot={handleSpotCreated} />
+          <HostSpaceTab 
+            onAddNewSpot={handleSpotCreated} 
+            onInspect={onInspect}
+            onManualClick={onManualClick}
+          />
         </div>
       )}
 
@@ -268,7 +276,11 @@ export default function HostDashboard({ spots, onSwitchToDriverMode, onAddNewSpo
 
       {/* 4. GATE TELEMETRY LOGS */}
       {currentTab === 'logs' && (
-        <div className="space-y-3 animate-in fade-in duration-150">
+        <div 
+          className="space-y-3 animate-in fade-in duration-150"
+          onMouseEnter={() => onInspect?.('host-gate-logs')}
+          onClick={() => onManualClick?.('host-gate-logs')}
+        >
           <div className="flex items-center justify-between px-1">
             <h3 className="text-xs font-bold text-white uppercase tracking-wider">
               Live Gate Sensor & OTP Check-ins

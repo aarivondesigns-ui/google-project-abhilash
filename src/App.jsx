@@ -8,7 +8,8 @@ import MyBookingsTab from './components/MyBookingsTab';
 import HostDashboard from './components/HostDashboard';
 import LoginModal from './components/LoginModal';
 import SupportSettingsModal from './components/SupportSettingsModal';
-import DesktopAppManual from './components/DesktopAppManual';
+import InteractiveAppManual from './components/InteractiveAppManual';
+import InteractiveFeatureIndex from './components/InteractiveFeatureIndex';
 import { INITIAL_SPOTS, INITIAL_ACTIVE_BOOKING } from './data/spots';
 import { 
   fetchSpotsFromDB, fetchActiveBookingFromDB, 
@@ -136,14 +137,69 @@ export default function App() {
     }
   };
 
-  const handleManualNavigate = (targetRole, targetTab) => {
-    setRole(targetRole);
-    if (targetRole === 'host') {
-      setHostActiveTab(targetTab);
-    } else {
-      setDriverActiveTab(targetTab);
+  // Interactive Live Manual / App Inspector State
+  const [activeManualKey, setActiveManualKey] = useState(null);
+  const [isManualPinned, setIsManualPinned] = useState(false);
+
+  const handleInspect = (key) => {
+    if (!isManualPinned) {
+      setActiveManualKey(key);
     }
-    showToast(`Switched to ${targetRole === 'host' ? 'Host' : 'Driver'} • ${targetTab.toUpperCase()}`);
+  };
+
+  const handleManualClick = (key) => {
+    setActiveManualKey(key);
+    setIsManualPinned(true);
+  };
+
+  const handleTriggerFeature = (key) => {
+    switch (key) {
+      case 'role-switcher':
+        setRole((prev) => (prev === 'host' ? 'driver' : 'host'));
+        break;
+      case 'search-bar':
+      case 'filter-pills':
+      case 'view-toggle':
+      case 'map-canvas':
+      case 'ai-predictor':
+      case 'reserve-button':
+      case 'spot-photos':
+      case 'nav-explore':
+        setRole('driver');
+        setDriverActiveTab('explore');
+        break;
+      case 'nav-offers':
+        setRole('driver');
+        setDriverActiveTab('offers');
+        break;
+      case 'nav-wallet':
+        setRole('driver');
+        setDriverActiveTab('wallet');
+        break;
+      case 'nav-bookings':
+        setRole('driver');
+        setDriverActiveTab('bookings');
+        break;
+      case 'host-earnings-card':
+        setRole('host');
+        setHostActiveTab('overview');
+        break;
+      case 'host-gps-lock':
+      case 'host-property-type':
+      case 'host-pricing-schedule':
+        setRole('host');
+        setHostActiveTab('list');
+        break;
+      case 'host-gate-logs':
+        setRole('host');
+        setHostActiveTab('logs');
+        break;
+      case 'theme-toggle':
+        toggleTheme();
+        break;
+      default:
+        break;
+    }
   };
 
   return (
@@ -152,11 +208,17 @@ export default function App() {
       <div className="fixed top-1/4 left-1/4 w-96 h-96 bg-brandYellow/5 rounded-full blur-3xl pointer-events-none" />
       <div className="fixed bottom-1/4 right-1/4 w-96 h-96 bg-neonGreen/5 rounded-full blur-3xl pointer-events-none" />
 
-      {/* Desktop App Manual - Left Column (Driver Manual) */}
-      <DesktopAppManual 
-        role={role} 
-        onNavigate={handleManualNavigate} 
-        side="left" 
+      {/* Desktop App Manual - Left Column (Live Contextual Inspector) */}
+      <InteractiveAppManual 
+        activeManualKey={activeManualKey}
+        isPinned={isManualPinned}
+        onPinToggle={() => setIsManualPinned((p) => !p)}
+        onClear={() => {
+          setIsManualPinned(false);
+          setActiveManualKey(null);
+        }}
+        onTriggerFeature={handleTriggerFeature}
+        role={role}
       />
 
       {/* Main Mobile App Frame Container (max-width: 430px, rounded phone shell) */}
@@ -198,6 +260,8 @@ export default function App() {
             setSupportInitialTab(tab);
             setIsSupportOpen(true);
           }}
+          onInspect={handleInspect}
+          onManualClick={handleManualClick}
         />
 
         {/* Floating Toast Notification */}
@@ -217,6 +281,8 @@ export default function App() {
               onHostTabChange={setHostActiveTab}
               onSwitchToDriverMode={() => setRole('driver')}
               onAddNewSpot={handleAddNewSpot}
+              onInspect={handleInspect}
+              onManualClick={handleManualClick}
             />
           ) : (
             <>
@@ -224,6 +290,8 @@ export default function App() {
                 <ExploreTab
                   spots={spots}
                   onBookSpot={handleBookingSuccess}
+                  onInspect={handleInspect}
+                  onManualClick={handleManualClick}
                 />
               )}
 
@@ -260,6 +328,8 @@ export default function App() {
           activeTab={currentTab}
           onTabChange={handleTabChange}
           hasActiveBooking={role === 'driver' && !!activeBooking}
+          onInspect={handleInspect}
+          onManualClick={handleManualClick}
         />
 
         {/* Login & Demo Credentials Modal */}
@@ -282,11 +352,12 @@ export default function App() {
         />
       </main>
 
-      {/* Desktop App Manual - Right Column (Host Manual) */}
-      <DesktopAppManual 
-        role={role} 
-        onNavigate={handleManualNavigate} 
-        side="right" 
+      {/* Desktop App Manual - Right Column (Feature Index Directory) */}
+      <InteractiveFeatureIndex 
+        activeManualKey={activeManualKey}
+        onSelectManualKey={handleManualClick}
+        role={role}
+        onToggleRole={() => setRole((r) => (r === 'host' ? 'driver' : 'host'))}
       />
     </div>
   );

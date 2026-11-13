@@ -15,7 +15,7 @@ const HYD_COORDS_MAP = {
   'Manikonda': { lat: 17.4010, lng: 78.3850, address: 'Near Lanco Hills & Outer Ring Road, Manikonda 500089' }
 };
 
-export default function HostSpaceTab({ onAddNewSpot }) {
+export default function HostSpaceTab({ onAddNewSpot, onInspect, onManualClick }) {
   const [step, setStep] = useState(1);
 
   // Form State
@@ -265,7 +265,10 @@ export default function HostSpaceTab({ onAddNewSpot }) {
             Step 1: Choose Property Type
           </div>
 
-          <div className="grid grid-cols-2 gap-2.5">
+          <div 
+            className="grid grid-cols-2 gap-2.5"
+            onMouseEnter={() => onInspect?.('host-property-type')}
+          >
             {propertyOptions.map((opt) => {
               const Icon = opt.icon;
               const isSelected = propertyType === opt.label;
@@ -339,7 +342,11 @@ export default function HostSpaceTab({ onAddNewSpot }) {
           </div>
 
           {/* GPS Location Lock Section */}
-          <div className="bg-gray-50 dark:bg-[#0D1016] border border-gray-200 dark:border-white/10 rounded-2xl p-3.5 space-y-3 shadow-md">
+          <div 
+            className="bg-gray-50 dark:bg-[#0D1016] border border-gray-200 dark:border-white/10 rounded-2xl p-3.5 space-y-3 shadow-md cursor-pointer"
+            onMouseEnter={() => onInspect?.('host-gps-lock')}
+            onClick={() => onManualClick?.('host-gps-lock')}
+          >
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <div className={`w-7 h-7 rounded-lg flex items-center justify-center ${
@@ -421,7 +428,11 @@ export default function HostSpaceTab({ onAddNewSpot }) {
 
       {/* Step 2: Schedule & Rate */}
       {step === 2 && (
-        <div className="bg-[#161920] border border-cardBorder rounded-2xl p-4 space-y-4">
+        <div 
+          className="bg-[#161920] border border-cardBorder rounded-2xl p-4 space-y-4"
+          onMouseEnter={() => onInspect?.('host-pricing-schedule')}
+          onClick={() => onManualClick?.('host-pricing-schedule')}
+        >
           <div className="text-xs font-bold text-gray-300 uppercase tracking-wider">
             Step 2: Availability Schedule & Rate
           </div>
