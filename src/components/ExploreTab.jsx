@@ -13,8 +13,8 @@ export default function ExploreTab({ spots, onBookSpot }) {
   const [selectedSpot, setSelectedSpot] = useState(spots[0]);
   const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [isPhotoOpen, setIsPhotoOpen] = useState(false);
-  const [viewMode, setViewMode] = useState('map'); // 'map' | 'list'
-  const [showMapCallout, setShowMapCallout] = useState(true);
+  const [viewMode, setViewMode] = useState('list'); // 'list' as default view
+  const [showMapCallout, setShowMapCallout] = useState(false);
   const [highlightCard, setHighlightCard] = useState(false);
   const scrollRef = useRef(null);
   const headerRef = useRef(null);
@@ -137,7 +137,7 @@ export default function ExploreTab({ spots, onBookSpot }) {
                 <button
                   key={filter.id}
                   onClick={() => setActiveFilter(filter.id)}
-                  className={`px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-1 border ${
+                  className={`px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap shrink-0 transition-all flex items-center gap-1 border ${
                     isActive
                       ? 'bg-gradient-to-r from-amber-400 to-yellow-400 text-black border-transparent glow-yellow font-black shadow-md'
                       : 'bg-[#151821] text-gray-400 border-white/10 hover:text-white hover:border-white/20'
