@@ -14,7 +14,6 @@ export default function ExploreTab({ spots, onBookSpot }) {
   const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [isPhotoOpen, setIsPhotoOpen] = useState(false);
   const [viewMode, setViewMode] = useState('list'); // 'list' as default view
-  const [showMapCallout, setShowMapCallout] = useState(false);
   const [highlightCard, setHighlightCard] = useState(false);
   const scrollRef = useRef(null);
   const headerRef = useRef(null);
@@ -149,52 +148,14 @@ export default function ExploreTab({ spots, onBookSpot }) {
             })}
           </div>
 
-          {/* Prominent Segmented Map / List Switcher */}
-          <div className="relative flex items-center flex-shrink-0">
-            <div className="flex items-center bg-[#161920] p-1 rounded-xl border border-cardBorder shadow-sm">
-              <button
-                onClick={() => {
-                  setViewMode('map');
-                  setShowMapCallout(false);
-                }}
-                className={`px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all ${
-                  viewMode === 'map'
-                    ? 'bg-brandYellow text-black shadow-md glow-yellow font-black'
-                    : 'text-gray-400 hover:text-white'
-                }`}
-              >
-                <Map className="w-3.5 h-3.5" />
-                <span>Map</span>
-              </button>
-              <button
-                onClick={() => setViewMode('list')}
-                className={`px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all ${
-                  viewMode === 'list'
-                    ? 'bg-brandYellow text-black shadow-md glow-yellow font-black'
-                    : 'text-gray-400 hover:text-white'
-                }`}
-              >
-                <List className="w-3.5 h-3.5" />
-                <span>List</span>
-              </button>
-            </div>
-
-            {/* "Look in Map" Tooltip / Popup Callout with Bouncing Arrow */}
-            {viewMode === 'list' && showMapCallout && (
-              <div 
-                onClick={() => {
-                  setViewMode('map');
-                  setShowMapCallout(false);
-                }}
-                className="absolute right-0 -bottom-9 z-40 cursor-pointer animate-bounce flex items-center gap-1.5 bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-400 text-black text-[10px] font-black px-2.5 py-1 rounded-xl shadow-2xl border border-yellow-200 whitespace-nowrap"
-              >
-                <span>🗺️ Look in Map ↗</span>
-                <span className="text-[11px]">👆</span>
-                {/* Arrow pointing up to Map button */}
-                <div className="absolute -top-1 right-7 w-2 h-2 bg-yellow-400 rotate-45 border-t border-l border-yellow-200"></div>
-              </div>
-            )}
-          </div>
+          {/* Toggle Map / List button */}
+          <button
+            onClick={() => setViewMode(viewMode === 'map' ? 'list' : 'map')}
+            className="w-8 h-8 rounded-xl bg-[#161920] border border-cardBorder text-gray-300 hover:text-white flex items-center justify-center flex-shrink-0 transition-all shadow active:scale-95"
+            title="Toggle View"
+          >
+            {viewMode === 'map' ? <List className="w-4 h-4" /> : <Map className="w-4 h-4" />}
+          </button>
         </div>
       </div>
 
